@@ -11,7 +11,7 @@ function Home() {
       <div className="flex justify-between gap-4">
         <SideBar />
         <div className="bg-gray-100 w-full">
-          <Reports />
+          <DashBoard />
         </div>
       </div>
     </div>
