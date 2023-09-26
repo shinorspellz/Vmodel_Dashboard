@@ -31,7 +31,9 @@ function Todo() {
     <div>
       <div>
         {" "}
-        <div>Todo Lists</div>
+        <div className="text-2xl font-semibold text-gray-700 my-2 ml-2">
+          Todo Lists
+        </div>
         <div className="flex justify-start gap-2">
           <button className="px-4 py-2 text-white tracking-wider bg-blue-500 rounded-md">
             Print
