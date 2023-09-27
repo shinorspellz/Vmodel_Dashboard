@@ -19,7 +19,7 @@ const data = [
 
 function UserGgraph() {
   return (
-    <div className="w-full h-[30vh]">
+    <div className="w-full h-[45vh]">
       <div className="w-full text-2xl ml-4 mb-4 px-4">
         User Progress Graph{" "}
         <span className="text-2xl  text-blue-500 font-bold">2023</span>

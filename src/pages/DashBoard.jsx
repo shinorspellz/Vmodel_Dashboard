@@ -11,7 +11,7 @@ function DashBoard() {
       </div>
 
       <div className="w-full grid grid-cols-4 gap-4 px-4">
-        <div className="w-full bg-white shadow-lg h-[20vh] p-4 rounded-xl">
+        <div className="w-full bg-white shadow-lg h-[20vh] mb-8 p-4 rounded-xl">
           <div className="w-full flex justify-between">
             <div className="rounded-full p-4 border-2 w-12 h-12 flex justify-center items-center border-gray-600">
               {" "}
@@ -38,7 +38,7 @@ function DashBoard() {
               Users
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
-              <div class="bg-blue-600 h-2.5 rounded-full w-[45%]"></div>
+              <div class="bg-blue-600 h-2.5 rounded-full w-[80%]"></div>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ function DashBoard() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              44
             </div>
           </div>
           <div className="mt-4">
@@ -69,7 +69,7 @@ function DashBoard() {
               Coupons
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
-              <div class="bg-yellow-600 h-2.5 rounded-full w-[45%]"></div>
+              <div class="bg-yellow-600 h-2.5 rounded-full w-[40%]"></div>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ function DashBoard() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              20
             </div>
           </div>
           <div className="mt-4">
@@ -100,7 +100,7 @@ function DashBoard() {
               Bookings
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
-              <div class="bg-blue-600 h-2.5 rounded-full w-[45%]"></div>
+              <div class="bg-blue-600 h-2.5 rounded-full w-[20%]"></div>
             </div>
           </div>
         </div>
