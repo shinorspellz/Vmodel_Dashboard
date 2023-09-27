@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
 import UsersPage from "./pages/UsersPage";
 import Bookings from "./pages/Bookings";
+import Coupons from "./pages/CouponsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/bookings" element={<Bookings />} />
+            <Route path="/coupons" element={<Coupons />} />
           </Routes>
         </div>
       </div>

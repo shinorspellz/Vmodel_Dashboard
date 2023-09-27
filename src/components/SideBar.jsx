@@ -104,7 +104,7 @@ function SideBar() {
             <div>Bookings</div>
           </Link>
         </div>
-        <div className="">
+        <Link to="/coupons" className="">
           <button
             onClick={() => {
               setButtonClick("account");
@@ -126,7 +126,7 @@ function SideBar() {
 
             <div>Coupons</div>
           </button>
-        </div>
+        </Link>
         <div className="">
           <button
             onClick={() => {
