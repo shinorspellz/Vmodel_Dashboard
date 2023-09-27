@@ -1,5 +1,5 @@
 import React from "react";
-import Todo from "./Todo";
+import UserGgraph from "../components/UserGgraph";
 
 function DashBoard() {
   return (
@@ -34,7 +34,7 @@ function DashBoard() {
           </div>
           <div className="mt-4">
             <div className="w-fulltext-lg text-gray-500 font-semibold">
-              Reports
+              Users
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
               <div class="bg-blue-600 h-2.5 rounded-full w-[45%]"></div>
@@ -65,7 +65,7 @@ function DashBoard() {
           </div>
           <div className="mt-4">
             <div className="w-fulltext-lg text-gray-500 font-semibold">
-              Accounts
+              Coupons
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
               <div class="bg-yellow-600 h-2.5 rounded-full w-[45%]"></div>
@@ -96,7 +96,7 @@ function DashBoard() {
           </div>
           <div className="mt-4">
             <div className="w-fulltext-lg text-gray-500 font-semibold">
-              Members
+              Bookings
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
               <div class="bg-blue-600 h-2.5 rounded-full w-[45%]"></div>
@@ -127,7 +127,7 @@ function DashBoard() {
           </div>
           <div className="mt-4">
             <div className="w-fulltext-lg text-gray-500 font-semibold">
-              Todo
+              Services
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
               <div class="bg-yellow-600 h-2.5 rounded-full w-[45%]"></div>
@@ -135,8 +135,8 @@ function DashBoard() {
           </div>
         </div>
       </div>
-      <div className="mt-4">
-        <Todo />
+      <div className="mt-4 flex justify-between">
+        <UserGgraph />
       </div>
     </div>
   );

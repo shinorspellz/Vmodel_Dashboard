@@ -4,7 +4,7 @@ function SideBar() {
   const [buttonClick, setButtonClick] = useState("dashboard");
 
   return (
-    <div className="w-1/4 px-4 h-[100vh] bg-blue-800">
+    <div className="w-1/5 px-4 h-[100vh] bg-blue-800">
       <div className="h-[15vh]">
         {" "}
         <div className="w-full mt-8 flex  justify-center text-white">
