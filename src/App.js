@@ -6,6 +6,7 @@ import DashBoard from "./pages/DashBoard";
 import UsersPage from "./pages/UsersPage";
 import Bookings from "./pages/Bookings";
 import Coupons from "./pages/CouponsPage";
+import Services from "./pages/Services";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/coupons" element={<Coupons />} />
+            <Route path="/services" element={<Services />} />
           </Routes>
         </div>
       </div>

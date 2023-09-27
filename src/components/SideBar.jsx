@@ -128,7 +128,8 @@ function SideBar() {
           </button>
         </Link>
         <div className="">
-          <button
+          <Link
+            to="services"
             onClick={() => {
               setButtonClick("account");
             }}
@@ -148,7 +149,7 @@ function SideBar() {
             </svg>
 
             <div>Services</div>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
