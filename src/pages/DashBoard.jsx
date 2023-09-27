@@ -5,7 +5,7 @@ function DashBoard() {
   return (
     <div>
       <div className="h-[15vh] ">
-        <div className="text-4xl px-4 pt-2">Welcome Pastor Name</div>
+        <div className="text-4xl px-4 pt-2">Welcome Admin</div>
         <div className="text-lg text-gray-600 px-4 py-2">Dashboard</div>
       </div>
 

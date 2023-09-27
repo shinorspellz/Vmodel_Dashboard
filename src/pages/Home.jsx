@@ -7,10 +7,10 @@ import Reports from "./Reports";
 function Home() {
   return (
     <div>
-      <NavBar />
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-0">
         <SideBar />
         <div className="bg-gray-100 w-full">
+          <NavBar />
           <DashBoard />
         </div>
       </div>
