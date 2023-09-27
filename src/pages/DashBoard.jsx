@@ -1,5 +1,6 @@
 import React from "react";
 import UserGgraph from "../components/UserGgraph";
+import AddCoupon from "../components/AddCoupon";
 
 function DashBoard() {
   return (
@@ -135,8 +136,14 @@ function DashBoard() {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex justify-between">
-        <UserGgraph />
+      <div className="mt-4 flex justify-between gap-4">
+        <div className="w-full">
+          {" "}
+          <UserGgraph />
+        </div>
+        <div className="w-full mx-4 rounded-2xl">
+          <AddCoupon />
+        </div>
       </div>
     </div>
   );
