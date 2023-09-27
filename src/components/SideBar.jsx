@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SideBar() {
   const [buttonClick, setButtonClick] = useState("dashboard");
@@ -33,7 +34,8 @@ function SideBar() {
       </div>
       <div>
         <div className="">
-          <button
+          <Link
+            to="/"
             onClick={() => {
               setButtonClick("dashboard");
             }}
@@ -52,10 +54,11 @@ function SideBar() {
               />
             </svg>
             <div>DashBoard</div>
-          </button>
+          </Link>
         </div>
         <div className="">
-          <button
+          <Link
+            to="users"
             onClick={() => {
               setButtonClick("Report");
             }}
@@ -75,10 +78,11 @@ function SideBar() {
             </svg>
 
             <div>users</div>
-          </button>
+          </Link>
         </div>
         <div className="">
-          <button
+          <Link
+            to="bookings"
             onClick={() => {
               setButtonClick("todo");
             }}
@@ -98,7 +102,7 @@ function SideBar() {
             </svg>
 
             <div>Bookings</div>
-          </button>
+          </Link>
         </div>
         <div className="">
           <button

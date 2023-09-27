@@ -1,37 +1,41 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 
-function UsersPage() {
-  const users = [
+function Bookings() {
+  const bookings = [
     {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      username: "johndoe123",
-      password: "password123",
+      guestName: "John Doe",
+      checkInDate: "2023-10-15",
+      checkOutDate: "2023-10-20",
+      roomNumber: "101",
+      totalPrice: 500.0,
     },
     {
       id: 2,
-      firstName: "Alice",
-      lastName: "Smith",
-      username: "alicesmith456",
-      password: "mypassword456",
+      guestName: "Alice Smith",
+      checkInDate: "2023-11-05",
+      checkOutDate: "2023-11-10",
+      roomNumber: "202",
+      totalPrice: 600.0,
     },
     {
       id: 3,
-      firstName: "Bob",
-      lastName: "Johnson",
-      username: "bob.johnson",
-      password: "letmein789",
+      guestName: "Bob Johnson",
+      checkInDate: "2023-12-20",
+      checkOutDate: "2023-12-25",
+      roomNumber: "303",
+      totalPrice: 750.0,
     },
-    // Add more users here...
+    // Add more booking objects here...
     // ...
     {
       id: 50,
-      firstName: "Emily",
-      lastName: "Davis",
-      username: "emilydavis789",
-      password: "p@ssw0rd",
+      guestName: "Emily Davis",
+      checkInDate: "2023-09-30",
+      checkOutDate: "2023-10-05",
+      roomNumber: "404",
+      totalPrice: 550.0,
     },
   ];
 
@@ -63,7 +67,7 @@ function UsersPage() {
           </div>
           <div className="mt-4">
             <div className="w-full text-2xl text-gray-500 font-semibold">
-              Users
+              Bookings List
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-4">
               <div class="bg-blue-600 h-2.5 rounded-full w-[80%]"></div>
@@ -75,20 +79,25 @@ function UsersPage() {
         <table class="w-full ml-4 table-fixed   ">
           <thead className="px-4 text-left h-[5vh] bg-gray-900 ">
             <tr className="text-white text-lg ">
-              <th>FirstName</th>
-              <th>LastName</th>
-              <th>UserName</th>
-              <th>password</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>CheckIn</th>
+              <th>Checkout</th>
+              <th>Room Number</th>
+              <th>Total price</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody className="w-full ">
-            {users.map((user) => (
+            {bookings.map((booking) => (
               <tr className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer">
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
+                <td>{booking.id}</td>
+                <td>{booking.guestName}</td>
+                <td>{booking.checkInDate}</td>
+                <td>{booking.checkOutDate}</td>
+                <td>{booking.roomNumber}</td>
+                <td>{booking.to}</td>
+
                 <td className="flex justify-start gap-4 p-2 ">
                   <div className="p-2 rounded-2xl bg-green-600 hover:opacity-60">
                     <svg
@@ -130,4 +139,4 @@ function UsersPage() {
   );
 }
 
-export default UsersPage;
+export default Bookings;

@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar";
 import { Route, Routes } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
 import UsersPage from "./pages/UsersPage";
+import Bookings from "./pages/Bookings";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<UsersPage />} />
+            <Route path="/bookings" element={<Bookings />} />
           </Routes>
         </div>
       </div>
