@@ -2,10 +2,24 @@ import React from "react";
 import NavBar from "../components/NavBar";
 
 function UserDetails() {
+  const interests = [
+    "Hiking",
+    "Reading",
+    "Cooking",
+    "Photography",
+    "Traveling",
+    "Painting",
+    "Gardening",
+    "Swimming",
+    "Coding",
+    "Yoga",
+    "Singing",
+    "Dancing",
+  ];
   return (
     <div>
       <NavBar />
-      <div className="w-full h-[10vh] bg-blue-800 gap-8  flex justify-center items-center">
+      <div className="w-full pr-8 h-[10vh] bg-blue-800 gap-8  flex justify-end items-center">
         <button className="py-2 px-8 bg-blue-400 rounded-md font-medium text-lg flex gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +86,7 @@ function UserDetails() {
         </button>
       </div>
       <div className="flex mt-4">
-        <div className="bg-white rounded-2xl h-[50vh] flex justify-between w-3/4 shadow-xl  mx-4">
+        <div className="bg-white rounded-2xl h-[45vh] flex justify-between w-3/4 shadow-xl  mx-4">
           <div className=" w-full gap-4 m-4 text-gray-700 border-r-[1px] border-gray-200">
             <div className="flex gap-4 mb-4">
               <div className="w-40 h-40 bg-red-500 rounded-2xl "></div>
@@ -103,29 +117,93 @@ function UserDetails() {
           </div>
           <div className="w-4/6 flex h-[40vh] mt-4">
             <div className="w-full">
-              <h3 className="mb-4 text-base">Label</h3>
-              <h3 className="mb-4 text-base">Gender</h3>
-              <h3 className="mb-4 text-base">UserType</h3>
-              <h3 className="mb-4 text-base">Enthinicity</h3>
-              <h3 className="mb-4 text-base">Post</h3>
-              <h3 className="mb-4 text-base">Size</h3>
-              <h3 className="mb-4 text-base">Hair</h3>
-              <h3 className="mb-4 text-base">Eyes</h3>
+              <h3 className="mb-2 text-base">Label</h3>
+              <h3 className="mb-2 text-base">Gender</h3>
+              <h3 className="mb-2 text-base">UserType</h3>
+              <h3 className="mb-2 text-base">Enthinicity</h3>
+              <h3 className="mb-2 text-base">Post</h3>
+              <h3 className="mb-2 text-base">Size</h3>
+              <h3 className="mb-2 text-base">Hair</h3>
+              <h3 className="mb-2 text-base">Eyes</h3>
             </div>
             <div className="w-full ext-gray-700 font-medium">
               {" "}
-              <h3 className="mb-4 text-base">Red</h3>
-              <h3 className="mb-4 text-base">Male</h3>
-              <h3 className="mb-4 text-base">Client</h3>
-              <h3 className="mb-4 text-base">Ashanti</h3>
-              <h3 className="mb-4 text-base">56</h3>
-              <h3 className="mb-4 text-base">large</h3>
-              <h3 className="mb-4 text-base">Dark</h3>
-              <h3 className="mb-4 text-base">Brown</h3>
+              <h3 className="mb-2 text-base">Red</h3>
+              <h3 className="mb-2 text-base">Male</h3>
+              <h3 className="mb-2 text-base">Client</h3>
+              <h3 className="mb-2 text-base">Ashanti</h3>
+              <h3 className="mb-2 text-base">56</h3>
+              <h3 className="mb-2 text-base">large</h3>
+              <h3 className="mb-2 text-base">Dark</h3>
+              <h3 className="mb-2 text-base">Brown</h3>
             </div>
           </div>
         </div>
-        <div className="w-3/4 h-[40vh] bg-blue-500 mx-4"></div>
+        <div className="w-3/4 h-[40vh] bg-blue-500 mx-4 rounded-2xl">
+          <div className="flex gap-4">
+            <h3 className="m-4 font-semibold flex gap-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                />
+              </svg>
+              Date Joined:
+              <span className="text-lg  text-white"> 12 / 04 / 2022</span>
+            </h3>
+            <h3 className="m-4 font-semibold flex gap-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                />
+              </svg>
+              Date Last:
+              <span className="text-lg  text-white"> 12 / 04 / 2022</span>
+            </h3>
+          </div>
+          <div className="m-4">
+            <h3 className="font-semibold text-xl">Interest:</h3>
+            <div className="grid grid-cols-4 font-medium text-lg">
+              {interests.map((interest) => (
+                <div className="flex gap-2 text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+
+                  <div className=" gap-2 text-white">{interest}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full bg-red-500 h-[40vh] mt-4">
+        <div>IsActive</div>
       </div>
     </div>
   );
