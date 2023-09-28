@@ -6,7 +6,7 @@ function UserDetails() {
     <div>
       <NavBar />
       <div className="flex mt-4">
-        <div className="bg-white h-[50vh] flex justify-between w-3/4 shadow-xl  mx-4">
+        <div className="bg-white rounded-2xl h-[50vh] flex justify-between w-3/4 shadow-xl  mx-4">
           <div className=" w-full gap-4 m-4 text-gray-700 border-r-2 border-gray-400">
             <div className="flex gap-4 mb-4">
               <div className="w-40 h-40 bg-red-500 rounded-2xl "></div>
@@ -35,9 +35,29 @@ function UserDetails() {
               ea fugiat nulla deserunt tempor est officia nulla consequat.
             </div>
           </div>
-                  <div className="w-4/6  h-[40vh]">
-                  <div><h3>Label:</h3></div>
-                  </div>
+          <div className="w-4/6 flex h-[40vh] mt-4">
+            <div className="w-full">
+              <h3 className="mb-4 text-base">Label</h3>
+              <h3 className="mb-4 text-base">Gender</h3>
+              <h3 className="mb-4 text-base">UserType</h3>
+              <h3 className="mb-4 text-base">Enthinicity</h3>
+              <h3 className="mb-4 text-base">Post</h3>
+              <h3 className="mb-4 text-base">Size</h3>
+              <h3 className="mb-4 text-base">Hair</h3>
+              <h3 className="mb-4 text-base">Eyes</h3>
+            </div>
+            <div className="w-full ext-gray-700 font-medium">
+              {" "}
+              <h3 className="mb-4 text-base">Red</h3>
+              <h3 className="mb-4 text-base">Male</h3>
+              <h3 className="mb-4 text-base">Client</h3>
+              <h3 className="mb-4 text-base">Ashanti</h3>
+              <h3 className="mb-4 text-base">56</h3>
+              <h3 className="mb-4 text-base">large</h3>
+              <h3 className="mb-4 text-base">Dark</h3>
+              <h3 className="mb-4 text-base">Brown</h3>
+            </div>
+          </div>
         </div>
         <div className="w-3/4 h-[40vh] bg-blue-500 mx-4"></div>
       </div>
