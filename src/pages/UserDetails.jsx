@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-
+import profile from "../Asset/atmos.jpg";
 function UserDetails() {
   const interests = [
     "Hiking",
@@ -15,6 +15,49 @@ function UserDetails() {
     "Yoga",
     "Singing",
     "Dancing",
+  ];
+
+  const socialMediaFollowers = [
+    {
+      platform: "Instagram",
+      username: "instaUser123",
+      followers: 10000,
+    },
+    {
+      platform: "Facebook",
+      username: "fbUser456",
+      followers: 5000,
+    },
+    {
+      platform: "TikTok",
+      username: "tiktokUser789",
+      followers: 7500,
+    },
+    {
+      platform: "Snapchat",
+      username: "snapUser101",
+      followers: 2000,
+    },
+    {
+      platform: "Twitter",
+      username: "twitterUser222",
+      followers: 8000,
+    },
+    {
+      platform: "Pinterest",
+      username: "pinUser333",
+      followers: 3000,
+    },
+    {
+      platform: "Patreon",
+      username: "patreonUser444",
+      followers: 1500,
+    },
+    {
+      platform: "LinkedIn",
+      username: "linkedinUser555",
+      followers: 4000,
+    },
   ];
   return (
     <div>
@@ -89,7 +132,9 @@ function UserDetails() {
         <div className="bg-white rounded-2xl h-[45vh] flex justify-between w-3/4 shadow-xl  mx-4">
           <div className=" w-full gap-4 m-4 text-gray-700 border-r-[1px] border-gray-200">
             <div className="flex gap-4 mb-4">
-              <div className="w-40 h-40 bg-red-500 rounded-2xl "></div>
+              <div className="w-40 h-40  rounded-2xl border-2 border-gray-200 p-2">
+                <img src={profile} />
+              </div>
               <div className="text-left">
                 <h4 className="text-xl font-semibold text-gray-900">
                   FName LName
@@ -139,7 +184,29 @@ function UserDetails() {
             </div>
           </div>
         </div>
-        <div className="w-3/4 h-[40vh] bg-blue-500 mx-4 rounded-2xl">
+        <div className="w-3/4 h-[45vh] bg-blue-500 mx-4 rounded-2xl p-4 text-lg">
+          <h4 className="text-lg font-medium text-white drop-shadow-md">
+            Social Media
+          </h4>
+          <div>
+            {socialMediaFollowers.map((media) => (
+              <div className="flex justify-between gap-3">
+                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                  {media.platform}
+                </div>
+                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                  {media.username}
+                </div>
+                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                  {media.followers}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="w-full  flex justify-between h-[30vh]  mt-4">
+        <div className="w-full h-[30vh] bg-blue-500 mx-4 rounded-2xl">
           <div className="flex gap-4">
             <h3 className="m-4 font-semibold flex gap-4">
               <svg
@@ -201,9 +268,84 @@ function UserDetails() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-full bg-red-500 h-[40vh] mt-4">
-        <div>IsActive</div>
+        <div className="w-3/4  bg-blue-800 rounded-2xl">
+          <div className="w-full tracking-wide flex h-[40vh] mt-4">
+            <div className="w-full text-lg text-gray-300 font-medium p-4">
+              <h3 className="mb-2 text-xl">Active</h3>
+              <h3 className="mb-2 text-xl">Super User</h3>
+              <h3 className="mb-2 text-xl">Verified</h3>
+              <h3 className="mb-2 text-xl">Business Abbount</h3>
+            </div>
+            <div className="w-full text-gray-100 font-medium p-4">
+              <h3 className="mb-2 text-xl flex gap-2">
+                Yes{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </h3>
+              <h3 className="mb-2 text-xl flex gap-2">
+                No{" "}
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4 text-red-500">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                    />
+                  </svg>
+                </div>
+              </h3>
+              <h3 className="mb-2 text-xl flex gap-2">
+                No{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4  text-red-500">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                  />
+                </svg>
+              </h3>
+              <h3 className="mb-2 text-xl flex gap-2">
+                Yes{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
