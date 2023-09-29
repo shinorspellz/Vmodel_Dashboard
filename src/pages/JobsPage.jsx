@@ -6,7 +6,7 @@ function JobsPage() {
   let navigate = useNavigate();
 
   const serviceClick = (id) => {
-    navigate(`servicedetails`);
+    navigate(`jobdetails`);
   };
   const services = [
     {
