@@ -155,32 +155,35 @@ function UserDetails() {
             </div>
             <div>
               <h3 className="text-lg font-semibold">Bio</h3>
-              Labore nulla minim culpa enim et sunt. Sit est velit do esse elit
-              et cillum nulla consectetur mollit amet est amet. Sunt pariatur ea
-              ea fugiat nulla deserunt tempor est officia nulla consequat.
+              <p className="text-sm">
+                Labore nulla minim culpa enim et sunt. Sit est velit do esse
+                elit et cillum nulla consectetur mollit amet est amet. Sunt
+                pariatur ea ea fugiat nulla deserunt tempor est officia nulla
+                consequat.
+              </p>
             </div>
           </div>
           <div className="w-4/6 flex h-[40vh] mt-4">
             <div className="w-full">
-              <h3 className="mb-2 text-base">Label</h3>
-              <h3 className="mb-2 text-base">Gender</h3>
-              <h3 className="mb-2 text-base">UserType</h3>
-              <h3 className="mb-2 text-base">Enthinicity</h3>
-              <h3 className="mb-2 text-base">Post</h3>
-              <h3 className="mb-2 text-base">Size</h3>
-              <h3 className="mb-2 text-base">Hair</h3>
-              <h3 className="mb-2 text-base">Eyes</h3>
+              <h3 className="mb-[1.5px] text-base">Label</h3>
+              <h3 className="mb-[1.5px] text-base">Gender</h3>
+              <h3 className="mb-[1.5px] text-base">UserType</h3>
+              <h3 className="mb-[1.5px] text-base">Enthinicity</h3>
+              <h3 className="mb-[1.5px] text-base">Post</h3>
+              <h3 className="mb-[1.5px] text-base">Size</h3>
+              <h3 className="mb-[1.5px] text-base">Hair</h3>
+              <h3 className="mb-[1.5px] text-base">Eyes</h3>
             </div>
             <div className="w-full ext-gray-700 font-medium">
               {" "}
-              <h3 className="mb-2 text-base">Red</h3>
-              <h3 className="mb-2 text-base">Male</h3>
-              <h3 className="mb-2 text-base">Client</h3>
-              <h3 className="mb-2 text-base">Ashanti</h3>
-              <h3 className="mb-2 text-base">56</h3>
-              <h3 className="mb-2 text-base">large</h3>
-              <h3 className="mb-2 text-base">Dark</h3>
-              <h3 className="mb-2 text-base">Brown</h3>
+              <h3 className="mb-[1.5px] text-base">Red</h3>
+              <h3 className="mb-[1.5px] text-base">Male</h3>
+              <h3 className="mb-[1.5px] text-base">Client</h3>
+              <h3 className="mb-[1.5px] text-base">Ashanti</h3>
+              <h3 className="mb-[1.5px] text-base">56</h3>
+              <h3 className="mb-[1.5px] text-base">large</h3>
+              <h3 className="mb-[1.5px] text-base">Dark</h3>
+              <h3 className="mb-[1.5px] text-base">Brown</h3>
             </div>
           </div>
         </div>
@@ -191,13 +194,13 @@ function UserDetails() {
           <div>
             {socialMediaFollowers.map((media) => (
               <div className="flex justify-between gap-3">
-                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
                   {media.platform}
                 </div>
-                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
                   {media.username}
                 </div>
-                <div className="py-1 border-r-[1px] border-gray-200 w-full">
+                <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
                   {media.followers}
                 </div>
               </div>
