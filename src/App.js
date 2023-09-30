@@ -11,6 +11,7 @@ import UserDetails from "./pages/UserDetails";
 import ServiceDetails from "./pages/ServiceDetails";
 import JobsPage from "./pages/JobsPage";
 import JobDetails from "./pages/JobDetails";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <div className="w-full">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+
             <Route path="/users" element={<UsersPage />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/coupons" element={<Coupons />} />
