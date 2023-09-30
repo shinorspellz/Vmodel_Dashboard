@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import axios from "axios";
 import { UserContextProvider } from "./context/UserAuth";
 import PrivateRoute from "./components/PrivateRoute";
+import BookingDetails from "./pages/BookingDetails";
 
 function App() {
   axios.defaults.baseURL = "https://uat-api.vmodel.app/dashboard";
@@ -43,6 +44,10 @@ function App() {
                 <Route
                   path="services/servicedetails"
                   element={<ServiceDetails />}
+                />
+                <Route
+                  path="bookings/bookingdetails"
+                  element={<BookingDetails />}
                 />
               </Route>
             </Routes>

@@ -1,7 +1,14 @@
 import React from "react";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
+  const navigate = useNavigate();
+
+  const bookingClick = (id) => {
+    navigate(`bookingdetails`);
+    console.log("job de");
+  };
   const bookings = [
     {
       id: 1,
@@ -90,7 +97,9 @@ function Bookings() {
           </thead>
           <tbody className="w-full ">
             {bookings.map((booking) => (
-              <tr className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer">
+              <tr
+                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                onClick={() => bookingClick(booking.id)}>
                 <td>{booking.id}</td>
                 <td>{booking.guestName}</td>
                 <td>{booking.checkInDate}</td>

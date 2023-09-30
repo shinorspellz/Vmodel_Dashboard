@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 function JobsPage() {
   let navigate = useNavigate();
 
-  const serviceClick = (id) => {
+  const jobClick = (id) => {
     navigate(`jobdetails`);
+    console.log("job de");
   };
   const services = [
     {
@@ -122,7 +123,7 @@ function JobsPage() {
             {services.map((service) => (
               <tr
                 className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
-                onClick={() => serviceClick(service.id)}>
+                onClick={() => jobClick(service.id)}>
                 <td>{service.id}</td>
                 <td>{service.serviceName}</td>
                 <td>{service.serviceType}</td>
