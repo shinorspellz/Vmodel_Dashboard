@@ -9,7 +9,10 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [Incorrect_alert, setIncorrect_Alert] = useState(false);
+
   const { setUser, user } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
@@ -26,6 +29,16 @@ function Login() {
       setUser("text1");
 
       navigate("/home");
+    } else {
+      alert("Username or Password Incorrect");
+      setIncorrect_Alert(true);
+
+      setTimeout(() => {
+        setIncorrect_Alert(false);
+        console.log("show");
+      }, 1000);
+      setUsername("");
+      setPassword("");
     }
     // try {
     //   const userInfo = await axios.post("/login", {
@@ -44,6 +57,11 @@ function Login() {
       <div className="h-[60vh] flex items-center justify-center bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-1/2">
           <h2 className="text-2xl font-semibold mb-4">Login Page</h2>
+          {Incorrect_alert && (
+            <div className="bg-red-500 my-2 py-2 text-center">
+              UserName or Password is Incorrect
+            </div>
+          )}
           {loggedIn ? (
             <p className="text-green-600">Welcome, {username}!</p>
           ) : (
