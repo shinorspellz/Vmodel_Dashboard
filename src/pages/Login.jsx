@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const { setUser, user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -14,12 +20,23 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {
-    // You can implement your login logic here.
-    // For simplicity, we'll just check if username and password are not empty.
-    if (username && password) {
-      setLoggedIn(true);
+  const submitLogin = async (e) => {
+    e.preventDefault();
+    if (username == "adminuser" && password == "admin") {
+      setUser("text1");
+
+      navigate("/home");
     }
+    // try {
+    //   const userInfo = await axios.post("/login", {
+    //     username,
+    //     password,
+    //   });
+
+    //   alert("Login Successful. Now you can log in");
+    // } catch (e) {
+    //   alert("Login fail fail. Please try again letter");
+    // }
   };
   return (
     <div>
@@ -50,7 +67,7 @@ function Login() {
                 />
               </label>
               <button
-                onClick={handleLogin}
+                onClick={submitLogin}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                 Login
               </button>
