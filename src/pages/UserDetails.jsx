@@ -132,11 +132,11 @@ function UserDetails() {
         <div className="bg-white rounded-2xl h-[45vh] flex justify-between w-3/4 shadow-xl  mx-4">
           <div className=" w-full gap-4 m-4 text-gray-700 border-r-[1px] border-gray-200">
             <div className="flex gap-4 mb-4">
-              <div className="w-40 h-40  rounded-2xl border-2 border-gray-200 p-2">
+              <div className="w-40 h-45  rounded-2xl border-2 border-gray-200 p-2">
                 <img src={profile} />
               </div>
               <div className="text-left">
-                <h4 className="text-xl font-semibold text-gray-900">
+                <h4 className="text-lg font-semibold text-gray-900">
                   FName LName
                 </h4>
                 <h5 className="text-lg font-medium text-gray-600 italic">

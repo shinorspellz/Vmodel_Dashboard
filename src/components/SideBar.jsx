@@ -7,7 +7,7 @@ function SideBar() {
   const { user, setUser } = useContext(UserContext);
 
   const logout = () => {
-    setUser("")
+    setUser("");
   };
 
   return (
@@ -44,7 +44,7 @@ function SideBar() {
         <div>
           <div className="">
             <Link
-              to="/"
+              to="/home"
               onClick={() => {
                 setButtonClick("dashboard");
               }}
@@ -189,7 +189,7 @@ function SideBar() {
         ""
       )}
 
-      <div className="h-[30vh] relative flex items-end justify-center">
+      <div className="h-[25vh] relative flex items-end justify-center">
         <div>
           {user != "" ? (
             <button
