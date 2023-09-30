@@ -4,7 +4,11 @@ import { UserContext } from "../context/UserAuth";
 
 function SideBar() {
   const [buttonClick, setButtonClick] = useState("dashboard");
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const logout = () => {
+    setUser("")
+  };
 
   return (
     <div className="w-1/5 px-4 h-[100vh] bg-blue-800">
@@ -184,6 +188,20 @@ function SideBar() {
       ) : (
         ""
       )}
+
+      <div className="h-[30vh] relative flex items-end justify-center">
+        <div>
+          {user != "" ? (
+            <button
+              className=" bottom-0 h-full text-white text-lg font-semibold"
+              onClick={logout}>
+              Sign out
+            </button>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
