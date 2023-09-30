@@ -57,7 +57,8 @@ function CouponsDetails() {
             </div>
             <div className="text-left">
               <h4 className="text-xl font-semibold text-gray-900">
-                FName LName
+                <span className="text-sm text-gray-500"> Owner</span> : FName
+                LName
               </h4>
               <h5 className="text-lg font-medium text-gray-600 italic">
                 Username
