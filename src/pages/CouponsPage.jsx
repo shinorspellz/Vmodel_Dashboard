@@ -1,7 +1,8 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-
+import { useNavigate } from "react-router-dom";
 function Coupons() {
+  const navigate = useNavigate();
   const coupons = [
     {
       code: "SAVE10",
@@ -29,6 +30,9 @@ function Coupons() {
       expirationDate: "2023-11-15",
     },
   ];
+  const couponClick = (id) => {
+    navigate(`coupondetails`);
+  };
 
   return (
     <div>
@@ -78,7 +82,9 @@ function Coupons() {
           </thead>
           <tbody className="w-full ">
             {coupons.map((coupon) => (
-              <tr className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer">
+              <tr
+                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                onClick={() => couponClick(coupon.id)}>
                 <td>{coupon.code}</td>
                 <td>{coupon.discountPercentage}</td>
                 <td>{coupon.expirationDate}</td>
