@@ -73,7 +73,7 @@ function CouponsDetails() {
           </div>
         </div>
         <div className="text-2xl font-semibold text-blue-500 mr-4">
-          Booking Details
+          Coupons Details
         </div>
       </div>
 
