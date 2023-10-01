@@ -23,9 +23,7 @@ function SecurityPrompt({ prompt, actionPannel }) {
   const submitLogin = async (e) => {
     e.preventDefault();
     if (username == "adminuser" && password == "admin") {
-      setUser("text1");
-
-      navigate("/home");
+   
     } else {
       alert("Username or Password Incorrect");
       setIncorrect_Alert(true);
