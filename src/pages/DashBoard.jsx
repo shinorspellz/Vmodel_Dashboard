@@ -13,20 +13,26 @@ function DashBoard() {
   const [totalService, setTotalService] = useState("");
   const [totalBooking, setTotalBooking] = useState("");
   const [totalCoupon, setTotalCoupon] = useState("");
+  const [totalUsers, setTotalUsers] = useState("");
 
   const { token } = useContext(UserContext);
 
   useEffect(() => {
-    // axios
-    //   .get("/users", {
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       Authorization: `Token ${token}`,
-    //     },
-    //   })
-    //   .then(({ data }) => {
-    //     setUsers(data);
-    //   });
+    axios
+      .get("/users", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        try {
+          setUsers(data);
+          setTotalCoupon(coupons.data.length);
+        } catch {
+          setTotalCoupon(0);
+        }
+      });
     axios
       .get("/coupons", {
         headers: {
@@ -35,11 +41,11 @@ function DashBoard() {
         },
       })
       .then(({ data }) => {
-        if (data === null) {
-          setTotalCoupon(0);
-        } else {
+        try {
           setCoupons(data);
-          setTotalCoupon(coupons.data.length + 1);
+          setTotalCoupon(coupons.data.length);
+        } catch {
+          setTotalCoupon(0);
         }
       });
     axios
@@ -50,11 +56,11 @@ function DashBoard() {
         },
       })
       .then(({ data }) => {
-        if (data === null) {
-          setTotalBooking(0);
-        } else {
+        try {
           setBookings(data);
-          setTotalBooking(bookings.data.length + 1);
+          setTotalBooking(bookings.data.length);
+        } catch {
+          setTotalBooking(0);
         }
       });
 
