@@ -20,6 +20,18 @@ function DashBoard() {
 
   useEffect(() => {
     axios
+      .get("/users/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setUsers(respond.data);
+        setLoading(false);
+      });
+
+    axios
       .get("/coupons/", {
         headers: {
           "Content-type": "application/json",
@@ -31,20 +43,32 @@ function DashBoard() {
         setLoading(false);
       });
 
-    // axios
-    //   .get("/services", {
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       Authorization: `Token ${token}`,
-    //     },
-    //   })
-    //   .then(({ data }) => {
-    //     setServices(data);
-    //     setLoading(false);
-    //   });
+    axios
+      .get("/bookings/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setBookings(respond.data);
+        setLoading(false);
+      });
+
+    axios
+      .get("/services", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setServices(respond.data);
+        setLoading(false);
+      });
   }, []);
 
-  console.log(users);
+  console.log({ users });
 
   if (loading) {
     return <div>Loading</div>;
@@ -76,7 +100,15 @@ function DashBoard() {
                 </svg>
               </div>
               <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-                83
+                {users.data ? (
+                  users.data.length > 0 ? (
+                    users.data.length
+                  ) : (
+                    <div>0</div>
+                  )
+                ) : (
+                  <div>0</div>
+                )}
               </div>
             </div>
             <div className="mt-4">
@@ -107,7 +139,15 @@ function DashBoard() {
                 </svg>
               </div>
               <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-                {coupons.length}
+                {coupons.data ? (
+                  coupons.data.length > 0 ? (
+                    coupons.data.length
+                  ) : (
+                    <div>0</div>
+                  )
+                ) : (
+                  <div>0</div>
+                )}
               </div>
             </div>
             <div className="mt-4">
@@ -138,7 +178,15 @@ function DashBoard() {
                 </svg>
               </div>
               <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-                {totalBooking}
+                {bookings.data ? (
+                  bookings.data.length > 0 ? (
+                    bookings.data.length
+                  ) : (
+                    <div>0</div>
+                  )
+                ) : (
+                  <div>0</div>
+                )}
               </div>
             </div>
             <div className="mt-4">
@@ -169,7 +217,15 @@ function DashBoard() {
                 </svg>
               </div>
               <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-                {totalService}
+                {services.data ? (
+                  services.data.length > 0 ? (
+                    services.data.length
+                  ) : (
+                    <div>0</div>
+                  )
+                ) : (
+                  <div>0</div>
+                )}
               </div>
             </div>
             <div className="mt-4">
