@@ -1,68 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import profile from "../Asset/atmos.jpg";
 import SecurityPrompt from "../components/SecurityPrompt";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
+
 function UserDetails() {
-  const interests = [
-    "Hiking",
-    "Reading",
-    "Cooking",
-    "Photography",
-    "Traveling",
-    "Painting",
-    "Gardening",
-    "Swimming",
-    "Coding",
-    "Yoga",
-    "Singing",
-    "Dancing",
-  ];
+  const [userDetail, setUserDetail] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/users/fetch/" + id + "/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setUserDetail(respond.data);
+        setLoading(false);
+      });
+  }, []);
+
+  console.log(userDetail.data);
+
+  const { id } = useParams();
+  console.log({ id });
 
   const [action, setAction] = useState("");
   const [actionPannel, setActionPannel] = useState(false);
+  const [socialMedia, setSocialMedia] = useState([]);
 
-  const socialMediaFollowers = [
-    {
-      platform: "Instagram",
-      username: "instaUser123",
-      followers: 10000,
-    },
-    {
-      platform: "Facebook",
-      username: "fbUser456",
-      followers: 5000,
-    },
-    {
-      platform: "TikTok",
-      username: "tiktokUser789",
-      followers: 7500,
-    },
-    {
-      platform: "Snapchat",
-      username: "snapUser101",
-      followers: 2000,
-    },
-    {
-      platform: "Twitter",
-      username: "twitterUser222",
-      followers: 8000,
-    },
-    {
-      platform: "Pinterest",
-      username: "pinUser333",
-      followers: 3000,
-    },
-    {
-      platform: "Patreon",
-      username: "patreonUser444",
-      followers: 1500,
-    },
-    {
-      platform: "LinkedIn",
-      username: "linkedinUser555",
-      followers: 4000,
-    },
-  ];
+  useEffect(() => {
+    if (userDetail.data) {
+      const socialMediaFollowers = [
+        {
+          platform: "Instagram",
+          followers: userDetail.data.no_of_instagram_follows,
+        },
+        {
+          platform: "Youtube",
+          followers: userDetail.data.no_of_youtube_subs,
+        },
+        {
+          platform: "Facebook",
+          followers: userDetail.data.no_of_facebook_follows,
+        },
+        {
+          platform: "TikTok",
+          followers: userDetail.data.no_of_tiktok_follows,
+        },
+        {
+          platform: "Snapchat",
+          followers: userDetail.data.no_of_snapchat_follows,
+        },
+        {
+          platform: "Twitter",
+          followers: userDetail.data.no_of_twitter_follows,
+        },
+        {
+          platform: "Pinterest",
+          followers: userDetail.data.no_of_pinterest_follows,
+        },
+        {
+          platform: "Patreon",
+          followers: userDetail.data.no_of_patreon_follows,
+        },
+        {
+          platform: "LinkedIn",
+          followers: userDetail.data.no_of_linkedin_follows,
+        },
+      ];
+
+      setSocialMedia(socialMediaFollowers);
+    }
+  });
 
   const handleAction = (act) => {
     setActionPannel(true);
@@ -171,57 +186,97 @@ function UserDetails() {
             <div className=" w-full gap-4 m-4 text-gray-700 border-r-[1px] border-gray-200">
               <div className="flex gap-4 mb-4">
                 <div className="w-40 h-45  rounded-2xl border-2 border-gray-200 p-2">
-                  <img src={profile} />
+                  <img
+                    src={
+                      userDetail.data ? userDetail.data.profile_picture_url : ""
+                    }
+                  />
                 </div>
                 <div className="text-left">
                   <h4 className="text-lg font-semibold text-gray-900">
-                    FName LName
+                    {userDetail.data ? userDetail.data.first_name : ""}{" "}
+                    {userDetail.data ? userDetail.data.last_name : ""}
                   </h4>
-                  <h5 className="text-lg font-medium text-gray-600 italic">
-                    Username
+                  <h5 className="text-sm font-medium text-gray-600 italic">
+                    {userDetail.data ? "@" + userDetail.data.username : ""}
                   </h5>
 
                   <div className="mt-2">
-                    <h5>example@email.com</h5>
-                    <h5>+233 24 444 4444</h5>
-                    <h5>Ghana</h5>
+                    <h5> {userDetail.data ? userDetail.data.email : ""}</h5>
+                    <h5>
+                      {userDetail.data
+                        ? userDetail.data.phone_number.number
+                        : ""}
+                    </h5>
+                    <h5> {userDetail.data ? userDetail.data.country : ""}</h5>
                     <h5 className="">
-                      Price: <span className="text-lg font-semibold">$500</span>
+                      Price:
+                      <span className="text-lg font-semibold">
+                        {userDetail.data
+                          ? !userDetail.data.price
+                            ? "0"
+                            : userDetail.data.price
+                          : "0"}
+                      </span>
                     </h5>
                   </div>
                 </div>
               </div>
               <div>
                 <h3 className="text-lg font-semibold">Bio</h3>
-                <p className="text-sm">
-                  Labore nulla minim culpa enim et sunt. Sit est velit do esse
-                  elit et cillum nulla consectetur mollit amet est amet. Sunt
-                  pariatur ea ea fugiat nulla deserunt tempor est officia nulla
-                  consequat.
+                <p className="text-sm line-clamp-5">
+                  {userDetail.data ? userDetail.data.bio : ""}
                 </p>
               </div>
             </div>
             <div className="w-4/6 flex h-[40vh] mt-4">
               <div className="w-full">
-                <h3 className="mb-[1.5px] text-base">Label</h3>
-                <h3 className="mb-[1.5px] text-base">Gender</h3>
-                <h3 className="mb-[1.5px] text-base">UserType</h3>
-                <h3 className="mb-[1.5px] text-base">Enthinicity</h3>
-                <h3 className="mb-[1.5px] text-base">Post</h3>
-                <h3 className="mb-[1.5px] text-base">Size</h3>
-                <h3 className="mb-[1.5px] text-base">Hair</h3>
-                <h3 className="mb-[1.5px] text-base">Eyes</h3>
+                <h3 className="mb-[1.5px] text-sm">Label</h3>
+                <h3 className="mb-[1.5px] text-sm">Gender</h3>
+                <h3 className="mb-[1.5px] text-sm">UserType</h3>
+                <h3 className="mb-[1.5px] text-sm">Enthinicity</h3>
+                <h3 className="mb-[1.5px] text-sm">PostCode</h3>
+                <h3 className="mb-[1.5px] text-sm">Size</h3>
+                <h3 className="mb-[1.5px] text-sm">Hair</h3>
+                <h3 className="mb-[1.5px] text-sm">Eyes</h3>
               </div>
-              <div className="w-full ext-gray-700 font-medium">
+              <div className="w-full ext-gray-700 font-medium text-sm">
                 {" "}
-                <h3 className="mb-[1.5px] text-base">Red</h3>
-                <h3 className="mb-[1.5px] text-base">Male</h3>
-                <h3 className="mb-[1.5px] text-base">Client</h3>
-                <h3 className="mb-[1.5px] text-base">Ashanti</h3>
-                <h3 className="mb-[1.5px] text-base">56</h3>
-                <h3 className="mb-[1.5px] text-base">large</h3>
-                <h3 className="mb-[1.5px] text-base">Dark</h3>
-                <h3 className="mb-[1.5px] text-base">Brown</h3>
+                {userDetail.data ? (
+                  <div>
+                    {" "}
+                    <h3 className="mb-[2px] text-base truncate ">
+                      {userDetail.data.label}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {userDetail.data.gender}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {userDetail.data.user_type}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {userDetail.data.ethnicity}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {" "}
+                      {userDetail.data.postcode}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {" "}
+                      {userDetail.data.size}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {" "}
+                      {userDetail.data.hair}
+                    </h3>
+                    <h3 className="mb-[2px] text-base">
+                      {" "}
+                      {userDetail.data.eyes}
+                    </h3>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -230,14 +285,12 @@ function UserDetails() {
               Social Media
             </h4>
             <div>
-              {socialMediaFollowers.map((media) => (
+              {socialMedia.map((media) => (
                 <div className="flex justify-between gap-3">
                   <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
                     {media.platform}
                   </div>
-                  <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
-                    {media.username}
-                  </div>
+
                   <div className="py-[1.5px] border-r-[1px] border-gray-200 w-full">
                     {media.followers}
                   </div>
@@ -264,7 +317,9 @@ function UserDetails() {
                   />
                 </svg>
                 Date Joined:
-                <span className="text-lg  text-white"> 12 / 04 / 2022</span>
+                <span className="text-lg  text-white truncate">
+                  {userDetail.data ? userDetail.data.date_joined : ""}
+                </span>
               </h3>
               <h3 className="m-4 font-semibold flex gap-4">
                 <svg
@@ -281,31 +336,35 @@ function UserDetails() {
                   />
                 </svg>
                 Date Last:
-                <span className="text-lg  text-white"> 12 / 04 / 2022</span>
+                <span className="text-lg  text-white">
+                  {" "}
+                  {userDetail.data ? userDetail.data.last_login : ""}
+                </span>
               </h3>
             </div>
             <div className="m-4">
               <h3 className="font-semibold text-xl">Interest:</h3>
               <div className="grid grid-cols-4 font-medium text-lg">
-                {interests.map((interest) => (
-                  <div className="flex gap-2 text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                {userDetail.data &&
+                  userDetail.data.interests.map((interest) => (
+                    <div className="flex gap-2 text-white">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
 
-                    <div className=" gap-2 text-white">{interest}</div>
-                  </div>
-                ))}
+                      <div className=" gap-2 text-white">{interest}</div>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

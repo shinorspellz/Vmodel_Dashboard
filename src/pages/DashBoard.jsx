@@ -56,7 +56,7 @@ function DashBoard() {
       });
 
     axios
-      .get("/services", {
+      .get("/services/", {
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -244,7 +244,7 @@ function DashBoard() {
             <UserGgraph />
           </div>
           <div className="w-full mx-4 rounded-2xl">
-            <AddCoupon coupon={coupons.data} />
+            <AddCoupon coupon={coupons.data && coupons.data} />
           </div>
         </div>
       </div>

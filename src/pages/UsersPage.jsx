@@ -96,7 +96,7 @@ function UsersPage() {
   ];
 
   const UserClick = (id) => {
-    navigate(`userdetail`);
+    navigate("userdetail/" + id);
   };
 
   return (
@@ -286,7 +286,7 @@ function UsersPage() {
               user.data.map((user) => (
                 <tr
                   className="w-full  text-sm  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer overflow-visible"
-                  onClick={() => UserClick(user.userId)}>
+                  onClick={() => UserClick(user.id)}>
                   <td className="py-2">{user.id}</td>
                   <td className="py-2">{user.first_name}</td>
                   <td className="py-2">{user.last_name}</td>
