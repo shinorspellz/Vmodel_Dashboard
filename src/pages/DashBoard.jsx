@@ -31,10 +31,6 @@ function DashBoard() {
         setLoading(false);
       });
 
-    let totalc = coupons.length;
-    console.log("nu", coupons.length);
-    console.log("nww", coupons);
-
     // axios
     //   .get("/services", {
     //     headers: {
@@ -44,7 +40,7 @@ function DashBoard() {
     //   })
     //   .then(({ data }) => {
     //     setServices(data);
-    //     setTotalService(services.data.length + 1);
+    //     setLoading(false);
     //   });
   }, []);
 
