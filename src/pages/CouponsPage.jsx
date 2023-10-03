@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
+
 function Coupons() {
   const navigate = useNavigate();
+  const [coupons1, setCoupons1] = useState([]);
+  const [totalCoupon, setTotalCoupon] = useState("");
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/coupons", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        try {
+          setCoupons1(respond.data);
+          if (coupons && coupons1.length > 0) {
+            setTotalCoupon(coupons1.data.length);
+          }
+        } catch {
+          setTotalCoupon(0);
+        }
+      });
+  }, []);
   const coupons = [
     {
       code: "SAVE10",
@@ -62,7 +88,7 @@ function Coupons() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              {totalCoupon}
             </div>
           </div>
           <div className="mt-4">
@@ -86,16 +112,17 @@ function Coupons() {
             </tr>
           </thead>
           <tbody className="w-full ">
-            {coupons.map((coupon) => (
-              <tr
-                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
-                onClick={() => couponClick(coupon.id)}>
-                <td>{coupon.code}</td>
-                <td>{coupon.discountPercentage}</td>
-                <td>{coupon.expirationDate}</td>
-                <td>{coupon.uselimit}</td>
-              </tr>
-            ))}
+            {coupons1?.length &&
+              coupons1.map((coupon) => (
+                <tr
+                  className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                  onClick={() => couponClick(coupon.id)}>
+                  <td>{coupon.code}</td>
+                  <td>{coupon.discountPercentage}</td>
+                  <td>{coupon.expirationDate}</td>
+                  <td>{coupon.uselimit}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

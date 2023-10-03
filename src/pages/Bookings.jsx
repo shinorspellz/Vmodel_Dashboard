@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
 
 function Bookings() {
   const navigate = useNavigate();
+  const [bookings1, setBookings] = useState([]);
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/bookings", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        try {
+          setBookings(respond.data);
+        } catch {}
+      });
+
+    console.log({ bookings1 });
+  }, []);
 
   const bookingClick = (id) => {
     navigate(`bookingdetails`);
@@ -87,26 +108,23 @@ function Bookings() {
           <thead className="px-4 text-left h-[5vh] bg-gray-900 ">
             <tr className="text-white text-lg ">
               <th>Id</th>
-              <th>Name</th>
-              <th>CheckIn</th>
-              <th>Checkout</th>
-              <th>Room Number</th>
-              <th>Total price</th>
+              <th>Address</th>
+              <th>Appointment Date</th>
+              <th>Accepted</th>
             </tr>
           </thead>
           <tbody className="w-full ">
-            {bookings.map((booking) => (
-              <tr
-                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
-                onClick={() => bookingClick(booking.id)}>
-                <td>{booking.id}</td>
-                <td>{booking.guestName}</td>
-                <td>{booking.checkInDate}</td>
-                <td>{booking.checkOutDate}</td>
-                <td>{booking.roomNumber}</td>
-                <td>{booking.to}</td>
-              </tr>
-            ))}
+            {bookings1?.length &&
+              bookings1.map((booking) => (
+                <tr
+                  className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                  onClick={() => bookingClick(booking.id)}>
+                  <td>{booking.id}</td>
+                  <td>{booking.address}</td>
+                  <td>{booking.appointment_dates}</td>
+                  <td>{booking.accepted ? <div>Yes</div> : <div>No</div>}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

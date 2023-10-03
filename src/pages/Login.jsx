@@ -37,7 +37,6 @@ function Login() {
         password,
       });
       setToken(userInfo.data.data.token);
-      console.log({ token });
 
       setUser("userone");
       navigate("/home");
@@ -48,7 +47,6 @@ function Login() {
     }
   };
 
-  console.log({ token });
   return (
     <div>
       <NavBar />

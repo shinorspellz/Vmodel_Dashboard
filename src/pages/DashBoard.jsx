@@ -34,7 +34,7 @@ function DashBoard() {
     //     }
     //   });
     axios
-      .get("/coupons", {
+      .get("/coupons/", {
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -52,7 +52,7 @@ function DashBoard() {
       });
 
     axios
-      .get("/bookings", {
+      .get("/bookings/", {
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -70,7 +70,7 @@ function DashBoard() {
       });
 
     axios
-      .get("/services", {
+      .get("/services/", {
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
