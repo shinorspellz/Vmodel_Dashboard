@@ -4,14 +4,20 @@ import axios from "axios";
 import { UserContext } from "../context/UserAuth";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import jwt from "jwt-decode";
+import { useSignIn } from "react-auth-kit";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [Incorrect_alert, setIncorrect_Alert] = useState(false);
+  const signIn = useSignIn();
 
-  const { setUser, user } = useContext(UserContext);
+  const cookie = new Cookies();
+
+  const { setUser, user, setToken, token } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -25,32 +31,24 @@ function Login() {
 
   const submitLogin = async (e) => {
     e.preventDefault();
-    if (username == "adminuser" && password == "admin") {
-      setUser("text1");
+    try {
+      const userInfo = await axios.post("/login/", {
+        username,
+        password,
+      });
+      setToken(userInfo.data.data.token);
+      console.log({ token });
 
+      setUser("userone");
       navigate("/home");
-    } else {
-      alert("Username or Password Incorrect");
-      setIncorrect_Alert(true);
 
-      setTimeout(() => {
-        setIncorrect_Alert(false);
-        console.log("show");
-      }, 1000);
-      setUsername("");
-      setPassword("");
+      alert("Login Successful. Now you can log in");
+    } catch (e) {
+      alert("Login fail fail. Please try again letter");
     }
-    // try {
-    //   const userInfo = await axios.post("/login", {
-    //     username,
-    //     password,
-    //   });
-
-    //   alert("Login Successful. Now you can log in");
-    // } catch (e) {
-    //   alert("Login fail fail. Please try again letter");
-    // }
   };
+
+  console.log({ token });
   return (
     <div>
       <NavBar />

@@ -1,8 +1,78 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import UserGgraph from "../components/UserGgraph";
 import AddCoupon from "../components/AddCoupon";
+import { UserContext } from "../context/UserAuth";
 
 function DashBoard() {
+  const [users, setUsers] = useState(null);
+  const [bookings, setBookings] = useState(null);
+  const [jobs, setJobs] = useState(null);
+  const [services, setServices] = useState(null);
+  const [coupons, setCoupons] = useState(null);
+  const [totalService, setTotalService] = useState("");
+  const [totalBooking, setTotalBooking] = useState("");
+  const [totalCoupon, setTotalCoupon] = useState("");
+
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    // axios
+    //   .get("/users", {
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       Authorization: `Token ${token}`,
+    //     },
+    //   })
+    //   .then(({ data }) => {
+    //     setUsers(data);
+    //   });
+    axios
+      .get("/coupons", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        if (data === null) {
+          setTotalCoupon(0);
+        } else {
+          setCoupons(data);
+          setTotalCoupon(coupons.data.length + 1);
+        }
+      });
+    axios
+      .get("/bookings", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        if (data === null) {
+          setTotalBooking(0);
+        } else {
+          setBookings(data);
+          setTotalBooking(bookings.data.length + 1);
+        }
+      });
+
+    axios
+      .get("/services", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        setServices(data);
+        setTotalService(services.data.length + 1);
+      });
+  }, []);
+
+  console.log(users);
+
   return (
     <div>
       <div className="h-[15vh] ">
@@ -61,7 +131,7 @@ function DashBoard() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              44
+              {totalCoupon}
             </div>
           </div>
           <div className="mt-4">
@@ -92,7 +162,7 @@ function DashBoard() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              20
+              {totalBooking}
             </div>
           </div>
           <div className="mt-4">
@@ -123,7 +193,7 @@ function DashBoard() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              {totalService}
             </div>
           </div>
           <div className="mt-4">
