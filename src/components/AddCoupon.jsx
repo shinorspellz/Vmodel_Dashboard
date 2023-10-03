@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function AddCoupon() {
+function AddCoupon({ coupon }) {
+  const [latest, setLatest] = useState([]);
+  const [limit, setLimit] = useState([]);
+
+  useEffect(() => {
+    if (coupon && coupon.length > 0) {
+      // Slice the latest 6 items from the 'coupon' array
+      const cutdown = coupon.slice(-6);
+      setLimit(cutdown);
+    }
+  }, []);
+
+  console.log("latest", limit);
+
   const coupons = [
     {
       code: "SAVE10",
@@ -56,18 +69,19 @@ function AddCoupon() {
       <div>
         <div className="mx-4 text-lg flex  border-b-2 border-gray-200 bg-blue-900 py-2 px-2 text-white">
           <div className="w-full">Coupon Code</div>
-          <div className="w-full">Discount %</div>
+          <div className="w-full">Title</div>
           <div className="w-full  text-right">Expire Date</div>
         </div>
-        {coupons.map((coupon) => (
-          <div className="flex gap-2 mx-4 text-white text-lg  border-b-2 border-gray-200">
-            <div className="w-full py-1">{coupon.code}</div>
-            <div className="w-full py-1">{coupon.discountPercentage}</div>
-            <div className="w-full py-1 text-right">
-              {coupon.expirationDate}
+        {limit?.length > 0 &&
+          limit.map((coupon) => (
+            <div className="flex gap-2 mx-4 text-white text-sm  border-b-2 border-gray-200">
+              <div className="w-full py-1">{coupon.code}</div>
+              <div className="w-full py-1">{coupon.title}</div>
+              <div className="w-full py-1 text-right">
+                {coupon.expiry_date == null ? <div>Nun</div> : <div>{coupon.expiry_date }</div>}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

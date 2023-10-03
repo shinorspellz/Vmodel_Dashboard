@@ -5,11 +5,11 @@ import AddCoupon from "../components/AddCoupon";
 import { UserContext } from "../context/UserAuth";
 
 function DashBoard() {
-  const [users, setUsers] = useState(null);
-  const [bookings, setBookings] = useState(null);
-  const [jobs, setJobs] = useState(null);
-  const [services, setServices] = useState(null);
-  const [coupons, setCoupons] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [services, setServices] = useState([]);
+  const [coupons, setCoupons] = useState([]);
   const [totalService, setTotalService] = useState("");
   const [totalBooking, setTotalBooking] = useState("");
   const [totalCoupon, setTotalCoupon] = useState("");
@@ -18,21 +18,21 @@ function DashBoard() {
   const { token } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get("/users", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then(({ data }) => {
-        try {
-          setUsers(data);
-          setTotalCoupon(coupons.data.length);
-        } catch {
-          setTotalCoupon(0);
-        }
-      });
+    // axios
+    //   .get("/users", {
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       Authorization: `Token ${token}`,
+    //     },
+    //   })
+    //   .then(({ data }) => {
+    //     try {
+    //       setUsers(data);
+    //       setTotalUsers(users.data.length);
+    //     } catch {
+    //       setTotalCoupon(0);
+    //     }
+    //   });
     axios
       .get("/coupons", {
         headers: {
@@ -40,14 +40,17 @@ function DashBoard() {
           Authorization: `Token ${token}`,
         },
       })
-      .then(({ data }) => {
+      .then((respond) => {
         try {
-          setCoupons(data);
-          setTotalCoupon(coupons.data.length);
+          setCoupons(respond.data);
+          if (coupons && coupons.length > 0) {
+            setTotalCoupon(coupons.data.length);
+          }
         } catch {
           setTotalCoupon(0);
         }
       });
+
     axios
       .get("/bookings", {
         headers: {
@@ -55,10 +58,12 @@ function DashBoard() {
           Authorization: `Token ${token}`,
         },
       })
-      .then(({ data }) => {
+      .then((respond) => {
         try {
-          setBookings(data);
-          setTotalBooking(bookings.data.length);
+          setBookings(respond.data);
+          if (bookings && bookings.length > 0) {
+            setTotalCoupon(bookings.data.length);
+          }
         } catch {
           setTotalBooking(0);
         }
@@ -71,9 +76,11 @@ function DashBoard() {
           Authorization: `Token ${token}`,
         },
       })
-      .then(({ data }) => {
-        setServices(data);
-        setTotalService(services.data.length + 1);
+      .then((respond) => {
+        setServices(respond.data);
+        if (services && services.length > 0) {
+          setTotalService(services.data.length);
+        }
       });
   }, []);
 
@@ -218,7 +225,7 @@ function DashBoard() {
           <UserGgraph />
         </div>
         <div className="w-full mx-4 rounded-2xl">
-          <AddCoupon />
+          <AddCoupon coupon={coupons.data} />
         </div>
       </div>
     </div>
