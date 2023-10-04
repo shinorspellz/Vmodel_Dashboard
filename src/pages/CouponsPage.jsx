@@ -9,6 +9,7 @@ function Coupons() {
   const [coupons1, setCoupons1] = useState([]);
   const [totalCoupon, setTotalCoupon] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showdDletealert, setShowDeleteAlert] = useState(false);
 
   const { token } = useContext(UserContext);
 
@@ -29,7 +30,21 @@ function Coupons() {
     console.log("edit");
   };
   const deleteCoupon = (id) => {
-    console.log("delete");
+    axios
+      .delete("/coupons/delete/" + id + "/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setLoading(false);
+        setShowDeleteAlert(true);
+
+        setTimeout(() => {
+          setShowDeleteAlert(false);
+        }, 2000);
+      });
   };
 
   if (loading) {
@@ -38,6 +53,9 @@ function Coupons() {
     return (
       <div>
         <NavBar />
+        {showdDletealert && (
+          <div className="bg-red-600 py-2">Coupon Deleted Successfully</div>
+        )}
         <div className="w-3/4 ml-4 flex justify-start gap-4 mt-4">
           <div className="w-[20rem] bg-white shadow-lg h-[20vh] mb-8 p-4 rounded-xl">
             <div className="w-full flex justify-between">
@@ -104,7 +122,7 @@ function Coupons() {
                       <div
                         className="p-2 bg-green-500 rounded-full my-1 hover:opacity-60"
                         onClick={() => {
-                          deleteCoupon(coupon.data.id);
+                          editCoupon(coupon ? coupon.id : 0);
                         }}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +141,7 @@ function Coupons() {
                       <div
                         className="p-2 bg-red-500 rounded-full my-1 hover:opacity-60"
                         onClick={() => {
-                          editCoupon(coupon.data.id);
+                          deleteCoupon(coupon ? coupon.id : 0);
                         }}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
