@@ -28,68 +28,6 @@ function Services() {
     navigate("servicedetails/" + id);
   };
 
-  const services = [
-    {
-      id: 1,
-      serviceName: "Room Cleaning",
-      serviceType: "Modeling",
-      description: "Daily room cleaning service",
-      user: "kofi",
-      price: 30.0,
-      period: 4,
-    },
-    {
-      id: 2,
-      serviceName: "Breakfast Buffet",
-      serviceType: "Influencer",
-
-      description: "Daily breakfast buffet",
-      user: "kofi",
-      price: 15.0,
-      period: 4,
-    },
-    {
-      id: 3,
-      serviceName: "Airport Shuttle",
-      serviceType: "Modeling",
-
-      description: "Airport transportation service",
-      user: "kofi",
-      price: 50.0,
-      period: 4,
-    },
-    {
-      id: 4,
-      serviceName: "Spa Package",
-      serviceType: "Modeling",
-
-      description: "Relaxing spa treatment",
-      user: "kofi",
-      price: 80.0,
-    },
-    {
-      id: 5,
-      serviceName: "Room Service",
-      serviceType: "Modeling",
-
-      description: "In-room dining service",
-      user: "kofi",
-      price: 25.0,
-      period: 4,
-    },
-    // Add more service objects here...
-    // ...
-    {
-      id: 10,
-      serviceName: "Fitness Center Access",
-      serviceType: "Modeling",
-
-      description: "Access to the hotel's fitness center",
-      user: "kofi",
-      price: 10.0,
-      period: 4,
-    },
-  ];
   return (
     <div>
       <NavBar />

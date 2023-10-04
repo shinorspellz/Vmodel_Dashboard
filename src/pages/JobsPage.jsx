@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserAuth";
+import axios from "axios";
 
 function JobsPage() {
   let navigate = useNavigate();
+  const { token } = useContext(UserContext);
+  const [jobList, setSjobList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("jobs/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setSjobList(respond.data);
+        setLoading(false);
+      });
+  }, [jobList]);
 
   const jobClick = (id) => {
     navigate(`jobdetails`);
