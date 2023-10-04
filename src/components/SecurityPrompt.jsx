@@ -31,58 +31,88 @@ function SecurityPrompt({
     setPassword(e.target.value);
   };
 
+  const verified = {
+    data: {
+      is_verified: true,
+    },
+  };
+
   const submitLogin = async (e) => {
     e.preventDefault();
-
-    switch (prompt) {
-      case "Delete Coupon":
-        axios
-          .delete("/coupons/delete/" + id + "/", {
-            headers: {
-              "Content-type": "application/json",
-              Authorization: `Token ${token}`,
-            },
-          })
-          .then((respond) => {
-            setLoading(false);
-            setShowDeleteAlert(true);
-            setTimeout(() => {
-              setShowDeleteAlert(false);
-            }, 2000);
-          });
-        break;
-      case "verified":
-        //        "is_banned": true,
-        // "is_verified": true,
-        // "blue_tick_verified": true,
-        // "display_name": "string",
-        // "first_name": "string",
-        // "last_name": "string"
-
-        axios
-          .put(
-            `/users/update/${id}/`,
-            { is_verified: true }, // Set is_verified to true (a boolean, not a string)
-            {
+    try {
+      const userInfo = await axios.post("/login/", {
+        username,
+        password,
+      });
+      switch (prompt) {
+        case "Delete Coupon":
+          axios
+            .delete("/coupons/delete/" + id + "/", {
               headers: {
-                "Content-Type": "application/json",
+                "Content-type": "application/json",
                 Authorization: `Token ${token}`,
               },
-            }
-          )
-          .then((response) => {
-            setLoading(false);
-            console.log("Response:", response);
-            setLoading(false);
-          })
-          .catch((error) => {
-            // Handle errors here
-            console.error("Error:", error);
-          });
-        break;
+            })
+            .then((respond) => {
+              setLoading(false);
+              setShowDeleteAlert(true);
+              setTimeout(() => {
+                setShowDeleteAlert(false);
+              }, 2000);
+            });
+          break;
+        case "verified":
+          axios
+            .put(
+              "/users/update/" + id + "/",
+              {
+                is_verified: true,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Token ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              setLoading(false);
+              console.log("Response:", response);
+            })
+            .catch((error) => {
+              // Handle errors here
+              console.error("Error:", error);
+            });
+          break;
 
-      default:
-      // code block
+        default:
+        // code block
+        case "ban":
+          axios
+            .put(
+              "/users/update/" + id + "/",
+              {
+                is_banned: true,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Token ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              setLoading(false);
+              console.log("Response:", response);
+            })
+            .catch((error) => {
+              // Handle errors here
+              console.error("Error:", error);
+            });
+          break;
+      }
+    } catch (e) {
+      alert("Login fail fail. Please try again letter");
     }
   };
   return (
