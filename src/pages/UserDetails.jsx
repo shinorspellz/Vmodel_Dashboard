@@ -7,9 +7,13 @@ import axios from "axios";
 import { UserContext } from "../context/UserAuth";
 
 function UserDetails() {
+  const { id } = useParams();
+  console.log({ id });
   const [userDetail, setUserDetail] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cannotLoad, setCannotLoad] = useState(false);
+  const [ids, setIds] = useState(id);
+
   const { token } = useContext(UserContext);
 
   useEffect(() => {
@@ -31,9 +35,6 @@ function UserDetails() {
   }, []);
 
   console.log(userDetail.data);
-
-  const { id } = useParams();
-  console.log({ id });
 
   const [action, setAction] = useState("");
   const [actionPannel, setActionPannel] = useState(false);
@@ -92,7 +93,7 @@ function UserDetails() {
   console.log(action);
 
   if (cannotLoad) {
-    return <div>Loading Error</div>;
+    return <div>Loading </div>;
   }
   return (
     <div>
@@ -104,7 +105,12 @@ function UserDetails() {
               ? "absolute  w-full  h-[90vh]  flex  items-center justify-center "
               : "absolute  w-full  h-[90vh]  hidden items-center justify-center "
           }>
-          <SecurityPrompt prompt={action} actionPannel={setActionPannel} />
+          <SecurityPrompt
+            prompt={action}
+            actionPannel={setActionPannel}
+            id={ids}
+            setLoading={setLoading}
+          />
         </div>
       </div>
       <div>
@@ -129,30 +135,11 @@ function UserDetails() {
             </svg>
             Verified
           </button>
-          <button
-            className="py-2 px-8  bg-green-500 rounded-md font-medium text-lg flex gap-2"
-            onClick={() => {
-              handleAction("edit");
-            }}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-              />
-            </svg>
-            Edit
-          </button>
+
           <button
             className="py-2 px-8 bg-orange-500 rounded-md font-medium text-lg flex gap-2"
             onClick={() => {
-              handleAction("delete");
+              handleAction("delete user");
             }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -16,9 +16,8 @@ function SecurityPrompt({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [users, setUsers] = useState([]);
   const [Incorrect_alert, setIncorrect_Alert] = useState(false);
-
-  const { setUser, user } = useContext(UserContext);
 
   const { token } = useContext(UserContext);
 
@@ -34,6 +33,7 @@ function SecurityPrompt({
 
   const submitLogin = async (e) => {
     e.preventDefault();
+
     switch (prompt) {
       case "Delete Coupon":
         axios
@@ -51,9 +51,36 @@ function SecurityPrompt({
             }, 2000);
           });
         break;
-      case "delete":
-        // code block
+      case "verified":
+        //        "is_banned": true,
+        // "is_verified": true,
+        // "blue_tick_verified": true,
+        // "display_name": "string",
+        // "first_name": "string",
+        // "last_name": "string"
+
+        axios
+          .put(
+            `/users/update/${id}/`,
+            { is_verified: true }, // Set is_verified to true (a boolean, not a string)
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            setLoading(false);
+            console.log("Response:", response);
+            setLoading(false);
+          })
+          .catch((error) => {
+            // Handle errors here
+            console.error("Error:", error);
+          });
         break;
+
       default:
       // code block
     }
