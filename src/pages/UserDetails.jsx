@@ -371,81 +371,55 @@ function UserDetails() {
           <div className="w-3/4  bg-blue-800 rounded-2xl">
             <div className="w-full tracking-wide flex h-[40vh] mt-4">
               <div className="w-full text-lg text-gray-300 font-medium p-4">
-                <h3 className="mb-2 text-xl">Active</h3>
-                <h3 className="mb-2 text-xl">Super User</h3>
-                <h3 className="mb-2 text-xl">Verified</h3>
-                <h3 className="mb-2 text-xl">Business Abbount</h3>
+                <h3 className="mb-[2px] text-xl">Active</h3>
+                <h3 className="mb-[2px] text-xl">Super User</h3>
+                <h3 className="mb-[2px] text-xl">Verified</h3>
+                <h3 className="mb-[2px] text-xl">Business Account</h3>
+                <h3 className="mb-[2px] text-xl">Banned</h3>
+                <h3 className="mb-[2px] text-xl">Deleted</h3>
               </div>
               <div className="w-full text-gray-100 font-medium p-4">
-                <h3 className="mb-2 text-xl flex gap-2">
+                <h3 className="mb-[2px] text-xl flex gap-2">
                   {userDetail.data
                     ? userDetail.data.is_active
                       ? "Yes"
                       : "No"
                     : ""}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
                 </h3>
-                <h3 className="mb-2 text-xl flex gap-2">
-                  No{" "}
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 text-red-500">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-                      />
-                    </svg>
-                  </div>
+                <h3 className="mb-[2px] text-xl flex gap-2">
+                  {userDetail.data
+                    ? userDetail.data.is_superuser
+                      ? "Yes"
+                      : "No"
+                    : ""}
                 </h3>
-                <h3 className="mb-2 text-xl flex gap-2">
-                  No{" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4  text-red-500">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-                    />
-                  </svg>
+                <h3 className="mb-[2px] text-xl flex gap-2">
+                  {userDetail.data
+                    ? userDetail.data.is_verified
+                      ? "Yes"
+                      : "No"
+                    : ""}
                 </h3>
-                <h3 className="mb-2 text-xl flex gap-2">
-                  Yes{" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                <h3 className="mb-[2px] text-xl flex gap-2">
+                  {userDetail.data
+                    ? userDetail.data.is_business_account
+                      ? "Yes"
+                      : "No"
+                    : ""}
+                </h3>
+                <h3 className="mb-[2px] text-xl flex gap-2">
+                  {userDetail.data
+                    ? userDetail.data.is_banned
+                      ? "Yes"
+                      : "No"
+                    : ""}
+                </h3>
+                <h3 className="mb-[2px] text-xl flex gap-2">
+                  {userDetail.data
+                    ? userDetail.data.is_deleted
+                      ? "Yes"
+                      : "No"
+                    : ""}
                 </h3>
               </div>
             </div>
