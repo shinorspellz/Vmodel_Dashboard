@@ -77,7 +77,7 @@ function UserDetails() {
 
       setSocialMedia(socialMediaFollowers);
     }
-  });
+  }, [loading]);
 
   const handleAction = (act) => {
     setActionPannel(true);
@@ -378,7 +378,11 @@ function UserDetails() {
               </div>
               <div className="w-full text-gray-100 font-medium p-4">
                 <h3 className="mb-2 text-xl flex gap-2">
-                  Yes{" "}
+                  {userDetail.data
+                    ? userDetail.data.is_active
+                      ? "Yes"
+                      : "No"
+                    : ""}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
