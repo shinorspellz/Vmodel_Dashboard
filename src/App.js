@@ -50,10 +50,6 @@ function App() {
                   path="bookings/bookingdetails"
                   element={<BookingDetails />}
                 />
-                <Route
-                  path="coupons/coupondetails"
-                  element={<CouponsDetails />}
-                />
               </Route>
             </Routes>
           </div>
