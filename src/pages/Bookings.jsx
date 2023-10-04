@@ -6,7 +6,8 @@ import { UserContext } from "../context/UserAuth";
 
 function Bookings() {
   const navigate = useNavigate();
-  const [bookings1, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { token } = useContext(UserContext);
 
   useEffect(() => {
@@ -20,52 +21,17 @@ function Bookings() {
       .then((respond) => {
         try {
           setBookings(respond.data);
+          setLoading(true);
         } catch {}
       });
 
-    console.log({ bookings1 });
+    console.log({ bookings });
   }, []);
 
   const bookingClick = (id) => {
     navigate(`bookingdetails`);
     console.log("job de");
   };
-  const bookings = [
-    {
-      id: 1,
-      guestName: "John Doe",
-      checkInDate: "2023-10-15",
-      checkOutDate: "2023-10-20",
-      roomNumber: "101",
-      totalPrice: 500.0,
-    },
-    {
-      id: 2,
-      guestName: "Alice Smith",
-      checkInDate: "2023-11-05",
-      checkOutDate: "2023-11-10",
-      roomNumber: "202",
-      totalPrice: 600.0,
-    },
-    {
-      id: 3,
-      guestName: "Bob Johnson",
-      checkInDate: "2023-12-20",
-      checkOutDate: "2023-12-25",
-      roomNumber: "303",
-      totalPrice: 750.0,
-    },
-    // Add more booking objects here...
-    // ...
-    {
-      id: 50,
-      guestName: "Emily Davis",
-      checkInDate: "2023-09-30",
-      checkOutDate: "2023-10-05",
-      roomNumber: "404",
-      totalPrice: 550.0,
-    },
-  ];
 
   return (
     <div>
@@ -90,7 +56,7 @@ function Bookings() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              {bookings.data ? bookings.data.length : 0}
             </div>
           </div>
           <div className="mt-4">
@@ -114,8 +80,9 @@ function Bookings() {
             </tr>
           </thead>
           <tbody className="w-full ">
-            {bookings1?.length &&
-              bookings1.map((booking) => (
+            {bookings.data &&
+              bookings?.length &&
+              bookings.map((booking) => (
                 <tr
                   className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
                   onClick={() => bookingClick(booking.id)}>
