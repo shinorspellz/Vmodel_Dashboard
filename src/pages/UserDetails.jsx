@@ -338,7 +338,7 @@ function UserDetails() {
                 Date Last:
                 <span className="text-lg  text-white">
                   {" "}
-                  {userDetail.data ? userDetail.data.last_login : ""}
+                  {userDetail ? userDetail.data.last_login : ""}
                 </span>
               </h3>
             </div>
