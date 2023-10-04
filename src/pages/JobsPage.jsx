@@ -22,74 +22,13 @@ function JobsPage() {
         setSjobList(respond.data);
         setLoading(false);
       });
-  }, [jobList]);
+  }, []);
 
   const jobClick = (id) => {
     navigate(`jobdetails`);
     console.log("job de");
   };
-  const services = [
-    {
-      id: 1,
-      serviceName: "Room Cleaning",
-      serviceType: "Modeling",
-      description: "Daily room cleaning service",
-      user: "kofi",
-      price: 30.0,
-      period: 4,
-    },
-    {
-      id: 2,
-      serviceName: "Breakfast Buffet",
-      serviceType: "Influencer",
 
-      description: "Daily breakfast buffet",
-      user: "kofi",
-      price: 15.0,
-      period: 4,
-    },
-    {
-      id: 3,
-      serviceName: "Airport Shuttle",
-      serviceType: "Modeling",
-
-      description: "Airport transportation service",
-      user: "kofi",
-      price: 50.0,
-      period: 4,
-    },
-    {
-      id: 4,
-      serviceName: "Spa Package",
-      serviceType: "Modeling",
-
-      description: "Relaxing spa treatment",
-      user: "kofi",
-      price: 80.0,
-    },
-    {
-      id: 5,
-      serviceName: "Room Service",
-      serviceType: "Modeling",
-
-      description: "In-room dining service",
-      user: "kofi",
-      price: 25.0,
-      period: 4,
-    },
-    // Add more service objects here...
-    // ...
-    {
-      id: 10,
-      serviceName: "Fitness Center Access",
-      serviceType: "Modeling",
-
-      description: "Access to the hotel's fitness center",
-      user: "kofi",
-      price: 10.0,
-      period: 4,
-    },
-  ];
   return (
     <div>
       <NavBar />
@@ -113,7 +52,7 @@ function JobsPage() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              {jobList.data && jobList.data.length}
             </div>
           </div>
           <div className="mt-4">
@@ -126,31 +65,31 @@ function JobsPage() {
           </div>
         </div>{" "}
       </div>
-      <div>
+      <div className="w-full h-[60vh] overflow-y-scroll">
         <table class="w-full ml-4 table-fixed   ">
           <thead className="px-4 text-left h-[5vh] bg-gray-900 ">
             <tr className="text-white text-lg ">
               <th>Id</th>
-              <th>Service Title</th>
-              <th>Service Type</th>
-              <th>User</th>
-              <th>Period</th>
-              <th>Price</th>
+              <th>Title</th>
+              <th>Job Type</th>
+              <th>Price Option</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody className="w-full ">
-            {services.map((service) => (
-              <tr
-                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
-                onClick={() => jobClick(service.id)}>
-                <td>{service.id}</td>
-                <td>{service.serviceName}</td>
-                <td>{service.serviceType}</td>
-                <td>{service.user}</td>
-                <td>{service.period}</td>
-                <td>{service.price}</td>
-              </tr>
-            ))}
+            {jobList.data
+              ? jobList.data.map((job) => (
+                  <tr
+                    className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                    onClick={() => jobClick(job.id)}>
+                    <td>{job.id}</td>
+                    <td>{job.title}</td>
+                    <td>{job.job_type}</td>
+                    <td>{job.price_option}</td>
+                    <td>{job.short_description}</td>
+                  </tr>
+                ))
+              : ""}
           </tbody>
         </table>
       </div>
