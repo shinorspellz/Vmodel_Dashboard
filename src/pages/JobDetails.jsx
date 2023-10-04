@@ -9,6 +9,7 @@ function Jobdetails() {
   const { id } = useParams();
 
   const [jobdetail, setJobDetail] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useContext(UserContext);
 
@@ -25,39 +26,22 @@ function Jobdetails() {
         setLoading(false);
       });
   }, []);
-  const job = {
-    id: 1,
-    title: "Graphic Designer",
-    jobType: "Freelance",
-    preferredGender: "Any",
-    shortDescription: "Create  stunning graphics for marketing campaigns.",
-    briefFile: "graphic_brief.pdf",
-    briefLink: "https://example.com/brief",
-    deliverableType: "Digital",
-    isDigitalContent: true,
-    delivery: "Online",
-    deliveryType: "Download",
-    locationNeeded: "Not specified",
-    ethnicityNeeded: "Any",
-    ageRange: "18-50",
-    height: "Not specified",
-    size: "Not specified",
-    skinCompletion: "Not specified",
-    createdAt: "2023-09-28",
-    deletedAt: null,
-    views: 500,
-    acceptMultiples: true,
-    closed: false,
-    paused: false,
-    category: "Design",
-    status: "Active",
-    approved: true,
-    rejected: false,
-    saves: 10,
-    created: "User123",
-    usageType: "One-time",
-    usageLength: "1 month",
-  };
+
+  useEffect(() => {
+    if (jobdetail.data) {
+      axios
+        .get("/users/fetch/" + jobdetail.data.creator, {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setUsers(respond.data);
+          setLoading(false);
+        });
+    }
+  }, [jobdetail]);
 
   // Add more services as needed
 
@@ -70,25 +54,30 @@ function Jobdetails() {
       <NavBar />
       <div className="flex justify-between">
         <div className="w-[25rem] mt-4 ml-4 bg-white shadow-lg h-[25vh] mb-8 p-4 rounded-xl">
-          <div className="flex gap-4 mb-4">
-            <div className="w-40 h-40  rounded-2xl border-2 border-gray-200 p-2">
-              <img src={profile} />
-            </div>
-            <div className="text-left">
-              <h4 className="text-xl font-semibold text-gray-900">
-                FName LName
-              </h4>
-              <h5 className="text-lg font-medium text-gray-600 italic">
-                Username
-              </h5>
+          {users.data ? (
+            <div className="flex gap-4 mb-4">
+              <div className="w-40 h-40  rounded-2xl border-2 border-gray-200 p-2">
+                <img src={users.data.profile_picture_url} />
+              </div>
+              <div className="text-left">
+                <h4 className="text-xl font-semibold text-gray-900">
+                  {users.data.first_name} {users.data.last_name}
+                </h4>
+                <h5 className="text-lg font-medium text-gray-600 italic">
+                  {users.data.username}
+                </h5>
 
-              <div className="mt-2">
-                <h5>example@email.com</h5>
-                <h5>+233 24 444 4444</h5>
-                <h5>Ghana</h5>
+                <div className="mt-2">
+                  <h5> {users.data.email}</h5>
+                  <h5> {users.data.phone_number.completed}</h5>
+                  {console.log(users.data.phone_number.completed, "rrrt")}
+                  <h5>Ghana</h5>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="text-2xl font-semibold text-blue-500 mr-4">
           Job Details
@@ -169,7 +158,9 @@ function Jobdetails() {
                         </ul>
                       ))}
                     </td>
-                    <td>{jobdetail.data.deliverables_type}</td>{" "}
+                    <td className="truncate">
+                      {jobdetail.data.deliverables_type}
+                    </td>{" "}
                     <td>
                       {jobdetail.data.location.latitude}
                       {jobdetail.data.location.longitude}

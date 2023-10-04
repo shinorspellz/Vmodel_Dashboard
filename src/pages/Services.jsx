@@ -9,24 +9,33 @@ function Services() {
   const { token } = useContext(UserContext);
   const [servicesList, setServicesList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cannotLoad, setCannotLoad] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("services/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setServicesList(respond.data);
-        setLoading(false);
-      });
+    try {
+      axios
+        .get("services/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setServicesList(respond.data);
+          setLoading(false);
+        });
+    } catch {
+      setCannotLoad(false);
+    }
   }, [servicesList]);
 
   const serviceClick = (id) => {
     navigate("servicedetails/" + id);
   };
+
+  if (cannotLoad) {
+    return <div>Loading Error</div>;
+  }
 
   return (
     <div>
@@ -51,7 +60,7 @@ function Services() {
               </svg>
             </div>
             <div className=" p-4 text-2xl font-semibold text-blue-500 w-12 h-12 flex justify-center items-center ">
-              83
+              {servicesList.data && servicesList.data.length}
             </div>
           </div>
           <div className="mt-4">

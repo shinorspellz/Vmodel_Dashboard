@@ -86,7 +86,7 @@ function JobsPage() {
                     <td>{job.title}</td>
                     <td>{job.job_type}</td>
                     <td>{job.price_option}</td>
-                    <td>{job.short_description}</td>
+                    <td className="truncate">{job.short_description}</td>
                   </tr>
                 ))
               : ""}

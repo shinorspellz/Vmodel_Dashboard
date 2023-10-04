@@ -15,60 +15,69 @@ function DashBoard() {
   const [totalCoupon, setTotalCoupon] = useState(0);
   const [totalUsers, setTotalUsers] = useState("");
   const [loading, setLoading] = useState(true);
+  const [cannotLoad, setCannotLoad] = useState(false);
 
   const { token } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get("/users/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setUsers(respond.data);
-        setLoading(false);
-      });
+    try {
+      axios
+        .get("/users/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setUsers(respond.data);
+          setLoading(false);
+        });
 
-    axios
-      .get("/coupons/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setCoupons(respond.data);
-        setLoading(false);
-      });
+      axios
+        .get("/coupons/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setCoupons(respond.data);
+          setLoading(false);
+        });
 
-    axios
-      .get("/bookings/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setBookings(respond.data);
-        setLoading(false);
-      });
+      axios
+        .get("/bookings/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setBookings(respond.data);
+          setLoading(false);
+        });
 
-    axios
-      .get("/services/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setServices(respond.data);
-        setLoading(false);
-      });
+      axios
+        .get("/services/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setServices(respond.data);
+          setLoading(false);
+        });
+    } catch {
+      setCannotLoad(true);
+    }
   }, []);
 
   console.log({ users });
+
+  if (cannotLoad) {
+    return <div>Error</div>;
+  }
 
   if (loading) {
     return <div>Loading</div>;

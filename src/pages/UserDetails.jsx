@@ -9,20 +9,25 @@ import { UserContext } from "../context/UserAuth";
 function UserDetails() {
   const [userDetail, setUserDetail] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cannotLoad, setCannotLoad] = useState(false);
   const { token } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get("/users/fetch/" + id + "/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setUserDetail(respond.data);
-        setLoading(false);
-      });
+    try {
+      axios
+        .get("/users/fetch/" + id + "/", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((respond) => {
+          setUserDetail(respond.data);
+          setLoading(false);
+        });
+    } catch {
+      setCannotLoad(true);
+    }
   }, []);
 
   console.log(userDetail.data);
@@ -85,6 +90,10 @@ function UserDetails() {
   };
 
   console.log(action);
+
+  if (cannotLoad) {
+    return <div>Loading Error</div>;
+  }
   return (
     <div>
       <NavBar />
@@ -336,7 +345,7 @@ function UserDetails() {
                   />
                 </svg>
                 Date Last:
-                <span className="text-lg  text-white">
+                <span className="text-lg truncate  text-white">
                   {" "}
                   {userDetail.data ? userDetail.data.last_login : ""}
                 </span>
