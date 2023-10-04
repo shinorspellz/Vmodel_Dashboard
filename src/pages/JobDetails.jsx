@@ -61,6 +61,10 @@ function Jobdetails() {
 
   // Add more services as needed
 
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div>
       <NavBar />
@@ -110,17 +114,20 @@ function Jobdetails() {
                 </tr>
               </thead>
               <tbody className="w-full">
-                <tr className="w-full">
-                  <td>{job.id}</td>
+                {jobdetail.data &&
+                  jobdetail.data.map((job) => (
+                    <tr className="w-full">
+                      <td>{job.id}</td>
 
-                  <td>{job.title}</td>
-                  <td className="truncate">{job.shortDescription}</td>
-                  <td>{job.jobType}</td>
-                  <td>{job.preferredGender}</td>
-                  <td className="truncate">{job.briefLink}</td>
-                  <td>{job.deliverableType}</td>
-                  <td>{job.isDigitalContent}</td>
-                </tr>
+                      <td>{job.job_title}</td>
+                      <td className="truncate">{job.shortDescription}</td>
+                      <td>{job.jobType}</td>
+                      <td>{job.preferredGender}</td>
+                      <td className="truncate">{job.briefLink}</td>
+                      <td>{job.deliverableType}</td>
+                      <td>{job.isDigitalContent}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

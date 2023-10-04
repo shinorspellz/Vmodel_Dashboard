@@ -25,7 +25,7 @@ function JobsPage() {
   }, []);
 
   const jobClick = (id) => {
-    navigate(`jobdetails`);
+    navigate(`jobdetails/${id}`);
     console.log("job de");
   };
 
