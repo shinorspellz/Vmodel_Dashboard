@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserAuth";
+import axios from "axios";
 
 function Services() {
   let navigate = useNavigate();
+  const { token } = useContext(UserContext);
+  const [servicesList, setServicesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("services/", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setServicesList(respond.data);
+        setLoading(false);
+      });
+  }, [servicesList]);
 
   const serviceClick = (id) => {
-    navigate(`servicedetails`);
+    navigate("servicedetails/" + id);
   };
+
   const services = [
     {
       id: 1,
@@ -106,31 +126,31 @@ function Services() {
           </div>
         </div>{" "}
       </div>
-      <div>
+      <div className="w-full h-[60vh] overflow-scroll">
         <table class="w-full ml-4 table-fixed   ">
           <thead className="px-4 text-left h-[5vh] bg-gray-900 ">
             <tr className="text-white text-lg ">
               <th>Id</th>
               <th>Service Title</th>
               <th>Service Type</th>
-              <th>User</th>
-              <th>Period</th>
+              <th>Description</th>
               <th>Price</th>
             </tr>
           </thead>
           <tbody className="w-full ">
-            {services.map((service) => (
-              <tr
-                className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
-                onClick={() => serviceClick(service.id)}>
-                <td>{service.id}</td>
-                <td>{service.serviceName}</td>
-                <td>{service.serviceType}</td>
-                <td>{service.user}</td>
-                <td>{service.period}</td>
-                <td>{service.price}</td>
-              </tr>
-            ))}
+            {servicesList.data
+              ? servicesList.data.map((service) => (
+                  <tr
+                    className="w-full h-[0rem] text-base  border-gray-300 border-b-[2px] hover:bg-gray-300 cursor-pointer"
+                    onClick={() => serviceClick(service.id)}>
+                    <td>{service.id}</td>
+                    <td>{service.title}</td>
+                    <td>{service.service_type}</td>
+                    <td className="line-clamp-3 mx-2">{service.description}</td>
+                    <td>{service.price}</td>
+                  </tr>
+                ))
+              : ""}
           </tbody>
         </table>
       </div>

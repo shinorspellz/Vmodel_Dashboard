@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import profile from "../Asset/atmos.jpg";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
 
 function ServiceDetails() {
-  const services = {
-    title: "Web Design Service",
-    description: "Professional web design for businesses and individuals.",
-    serviceType: "Design",
-    period: "15 days",
-    approved: true,
-    price: 500.0,
-    category: "Graphic Design",
-    usageType: "One-time",
-    createdAt: "2023-09-28",
-    lastUpdated: "2023-09-28",
-    user: "Designer123",
-    likeStatus: "Liked",
-    saves: 20,
-    rejected: false,
-    discount: 10,
-    views: 1000,
-    service_management: "official",
-    initialDeposit: 100.0,
-    deleted: false,
-    delivery: "Digital Download",
-    meta: {
-      key1: "value1",
-      key2: "value2",
-    },
-  };
+  const { id } = useParams();
+
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/services/fetch/" + id, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setServices(respond.data);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div>
@@ -75,26 +71,31 @@ function ServiceDetails() {
                   <th>Approved</th>
                   <th>Price</th>
                   <th>Category</th>
-                  <th>Usage Type</th>
-                  <th>Created At</th>
-                  <th>Last Updated</th>
                 </tr>
               </thead>
-              <tbody className="w-full">
-                <tr className="w-full">
-                  <td>{services.title}</td>
-                  <td className="truncate">{services.description}</td>
-                  <td>{services.serviceType}</td>
-                  <td>{services.period}</td>
-                  <td>
-                    {services.approved == true ? <div>yes</div> : <div>No</div>}
-                  </td>
-                  <td>{services.price}</td>
-                  <td>{services.category}</td>
-                  <td>{services.usageType}</td>
-                  <td>{services.createdAt}</td>
-                  <td>{services.lastUpdated}</td>
-                </tr>
+              <tbody className="">
+                {services.data ? (
+                  <tr>
+                    {" "}
+                    <td> {services.data.title}</td>
+                    <td className="line-clamp-4 mx-2">
+                      {services.data.description}
+                    </td>
+                    <td>{services.data.service_type}</td>
+                    <td>{services.data.period}</td>
+                    <td>
+                      {services.data.approved == true ? (
+                        <div>yes</div>
+                      ) : (
+                        <div>No</div>
+                      )}
+                    </td>
+                    <td>{services.data.price}</td>
+                    <td>{services.data.category}</td>
+                  </tr>
+                ) : (
+                  ""
+                )}
               </tbody>
             </table>
           </div>
@@ -113,12 +114,18 @@ function ServiceDetails() {
               </tr>
             </thead>
             <tbody className="w-full">
-              <tr className="w-full">
-                <td>{services.saves}</td>
-                <td className="truncate">{services.rejected}</td>
-                <td>{services.discount}</td>
-                <td>{services.views}</td>
-              </tr>
+              {services.data ? (
+                <tr className="w-full">
+                  <td>{services.data.saves}</td>
+                  <td className="truncate">
+                    {services.data.rejected ? "yes" : "No"}
+                  </td>
+                  <td>{services.data.discount}</td>
+                  <td>{services.data.views}</td>
+                </tr>
+              ) : (
+                ""
+              )}
             </tbody>
           </table>
         </div>
@@ -136,14 +143,18 @@ function ServiceDetails() {
               </tr>
             </thead>
             <tbody className="w-full">
-              <tr className="w-full">
-                <td>{services.initialDeposit}</td>
+              {services.data ? (
+                <tr className="w-full">
+                  <td>{services.data.initial_deposit}</td>
 
-                <td className="truncate">
-                  {services.deleted ? <div>yes</div> : <div>No</div>}
-                </td>
-                <td>{services.delivery}</td>
-              </tr>
+                  <td className="truncate">
+                    {services.data.deleted ? <div>yes</div> : <div>No</div>}
+                  </td>
+                  <td>{services.data.delivery}</td>
+                </tr>
+              ) : (
+                ""
+              )}
             </tbody>
           </table>
         </div>

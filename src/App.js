@@ -43,7 +43,7 @@ function App() {
 
                 <Route path="users/userdetail/:id" element={<UserDetails />} />
                 <Route
-                  path="services/servicedetails"
+                  path="services/servicedetails/:id"
                   element={<ServiceDetails />}
                 />
                 <Route
