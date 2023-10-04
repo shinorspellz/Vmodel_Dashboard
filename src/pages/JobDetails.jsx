@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import profile from "../Asset/atmos.jpg";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
 
 function Jobdetails() {
+  const { id } = useParams();
+
+  const [jobdetail, setJobDetail] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/jobs/fetch/" + id, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setJobDetail(respond.data);
+        setLoading(false);
+      });
+  }, []);
   const job = {
     id: 1,
     title: "Graphic Designer",
     jobType: "Freelance",
     preferredGender: "Any",
-    shortDescription: "Create stunning graphics for marketing campaigns.",
+    shortDescription: "Create  stunning graphics for marketing campaigns.",
     briefFile: "graphic_brief.pdf",
     briefLink: "https://example.com/brief",
     deliverableType: "Digital",
