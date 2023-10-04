@@ -1,14 +1,26 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import NavBar from "../components/NavBar";
+import profile from "../Asset/atmos.jpg";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 import { UserContext } from "../context/UserAuth";
+import { useNavigate } from "react-router-dom";
 
-function SecurityPrompt({ prompt, actionPannel }) {
+function SecurityPrompt({
+  prompt,
+  actionPannel,
+  setShowDeleteAlert,
+  setLoading,
+  id,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [Incorrect_alert, setIncorrect_Alert] = useState(false);
 
   const { setUser, user } = useContext(UserContext);
+
+  const { token } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -22,37 +34,37 @@ function SecurityPrompt({ prompt, actionPannel }) {
 
   const submitLogin = async (e) => {
     e.preventDefault();
-    if (username == "adminuser" && password == "admin") {
-   
-    } else {
-      alert("Username or Password Incorrect");
-      setIncorrect_Alert(true);
-
-      setTimeout(() => {
-        setIncorrect_Alert(false);
-        console.log("show");
-      }, 1000);
-      setUsername("");
-      setPassword("");
+    switch (prompt) {
+      case "Delete Coupon":
+        axios
+          .delete("/coupons/delete/" + id + "/", {
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Token ${token}`,
+            },
+          })
+          .then((respond) => {
+            setLoading(false);
+            setShowDeleteAlert(true);
+            setTimeout(() => {
+              setShowDeleteAlert(false);
+            }, 2000);
+          });
+        break;
+      case "delete":
+        // code block
+        break;
+      default:
+      // code block
     }
-    // try {
-    //   const userInfo = await axios.post("/login", {
-    //     username,
-    //     password,
-    //   });
-
-    //   alert("Login Successful. Now you can log in");
-    // } catch (e) {
-    //   alert("Login fail fail. Please try again letter");
-    // }
   };
   return (
     <div className=" w-1/2  rounded-2xl shadow-2xl bg-white">
       <div className=" flex items-center justify-center bg-gray-100 rounded-2xl">
         <div className="bg-white  p-8 rounded-2xl shadow-md w-full">
           <h2 className="text-2xl font-semibold mb-4">
-            Are you sure you want to{" "}
-            {prompt ? <span>{prompt}</span> : <span>Delete</span>} this User
+            Are you sure you want to
+            {prompt ? <span>{prompt}</span> : <span>Delete</span>}
           </h2>
           <h6 className="py-2 italic">
             Input your credentials to complete this action

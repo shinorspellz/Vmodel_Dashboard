@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/UserAuth";
+import SecurityPrompt from "../components/SecurityPrompt";
 
 function Coupons() {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ function Coupons() {
   const [totalCoupon, setTotalCoupon] = useState("");
   const [loading, setLoading] = useState(true);
   const [showdDletealert, setShowDeleteAlert] = useState(false);
+  const [actionButton, setActionButton] = useState("");
+  const [id, setId] = useState("");
 
   const { token } = useContext(UserContext);
 
@@ -30,21 +33,8 @@ function Coupons() {
     console.log("edit");
   };
   const deleteCoupon = (id) => {
-    axios
-      .delete("/coupons/delete/" + id + "/", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((respond) => {
-        setLoading(false);
-        setShowDeleteAlert(true);
-
-        setTimeout(() => {
-          setShowDeleteAlert(false);
-        }, 2000);
-      });
+    setActionButton("Delete Coupon");
+    setId(id);
   };
 
   if (loading) {
@@ -56,6 +46,21 @@ function Coupons() {
         {showdDletealert && (
           <div className="bg-red-600 py-2">Coupon Deleted Successfully</div>
         )}
+
+        <div
+          className={
+            actionButton
+              ? "absolute  w-full  h-[90vh]  flex  items-center justify-center "
+              : "absolute  w-full  h-[90vh]  hidden items-center justify-center "
+          }>
+          <SecurityPrompt
+            prompt={actionButton}
+            actionPannel={setActionButton}
+            setShowDeleteAlert={setShowDeleteAlert}
+            setLoading={setLoading}
+            id={id}
+          />
+        </div>
         <div className="w-3/4 ml-4 flex justify-start gap-4 mt-4">
           <div className="w-[20rem] bg-white shadow-lg h-[20vh] mb-8 p-4 rounded-xl">
             <div className="w-full flex justify-between">
