@@ -114,20 +114,26 @@ function Jobdetails() {
                 </tr>
               </thead>
               <tbody className="w-full">
-                {jobdetail.data &&
-                  jobdetail.data.map((job) => (
-                    <tr className="w-full">
-                      <td>{job.id}</td>
+                {jobdetail.data ? (
+                  <tr className="w-full">
+                    <td>{jobdetail.data.id}</td>
 
-                      <td>{job.job_title}</td>
-                      <td className="truncate">{job.shortDescription}</td>
-                      <td>{job.jobType}</td>
-                      <td>{job.preferredGender}</td>
-                      <td className="truncate">{job.briefLink}</td>
-                      <td>{job.deliverableType}</td>
-                      <td>{job.isDigitalContent}</td>
-                    </tr>
-                  ))}
+                    <td>{jobdetail.data.job_title}</td>
+                    <td>{jobdetail.data.job_type}</td>
+
+                    <td>{jobdetail.data.preferred_gender}</td>
+                    <td className="truncate">
+                      {jobdetail.data.short_description}
+                    </td>
+                    <td className="truncate">{jobdetail.data.briefLink}</td>
+                    <td className="truncate">
+                      {jobdetail.data.deliverables_type}
+                    </td>
+                    <td>{jobdetail.data.is_digital_content ? "Yes" : "No"}</td>
+                  </tr>
+                ) : (
+                  ""
+                )}
               </tbody>
             </table>
           </div>
@@ -152,16 +158,32 @@ function Jobdetails() {
                 </tr>
               </thead>
               <tbody className="w-full">
-                <tr className="w-full">
-                  <td>{job.delivery}</td>
-
-                  <td>{job.locationNeeded}</td>
-                  <td className="truncate">{job.ethnicityNeeded}</td>
-                  <td>{job.ageRange}</td>
-                  <td>{job.height}</td>
-                  <td>{job.size}</td>
-                  <td>{job.skinCompletion}</td>
-                </tr>
+                {jobdetail.data ? (
+                  <tr className="w-full">
+                    <td>
+                      {jobdetail.data.delivery.map((deliver) => (
+                        <ul className="text-sm">
+                          <li>{deliver.date}</li>
+                          <li>{deliver.end_time}</li>
+                          <li>{deliver.start_time}</li>
+                        </ul>
+                      ))}
+                    </td>
+                    <td>{jobdetail.data.deliverables_type}</td>{" "}
+                    <td>
+                      {jobdetail.data.location.latitude}
+                      {jobdetail.data.location.longitude}
+                      {jobdetail.data.location.location_name}
+                    </td>
+                    <td className="truncate">{jobdetail.data.age_range}</td>
+                    <td>{jobdetail.data.age_range}</td>
+                    <td>{jobdetail.data.height}</td>
+                    <td>{jobdetail.data.size}</td>
+                    <td>{jobdetail.data.skinCompletion}</td>
+                  </tr>
+                ) : (
+                  ""
+                )}
               </tbody>
             </table>
           </div>
@@ -181,13 +203,28 @@ function Jobdetails() {
               </tr>
             </thead>
             <tbody className="w-full">
-              <tr className="w-full">
-                <td>{job.createdAt}</td>
-                <td>{job.deletedAt ? <div>Yes</div> : <div>No</div>}</td>
-                <td>{job.acceptMultiples ? <div>Yes</div> : <div>No</div>}</td>
-                <td>{job.closed ? <div>Yes</div> : <div>No</div>}</td>
-                <td>{job.paused ? <div>Yes</div> : <div>No</div>}</td>
-              </tr>
+              {jobdetail.data ? (
+                <tr className="w-full">
+                  <td>{jobdetail.data.created_at}</td>
+                  <td>{jobdetail.data.deleted_at}</td>
+                  <td>
+                    {jobdetail.data.accept_multiple ? (
+                      <div>Yes</div>
+                    ) : (
+                      <div>No</div>
+                    )}
+                  </td>
+
+                  <td>
+                    {jobdetail.data.closed ? <div>Yes</div> : <div>No</div>}
+                  </td>
+                  <td>
+                    {jobdetail.data.paused ? <div>Yes</div> : <div>No</div>}
+                  </td>
+                </tr>
+              ) : (
+                ""
+              )}
             </tbody>
           </table>
         </div>
@@ -204,22 +241,20 @@ function Jobdetails() {
                 <th>Approved</th>
                 <th>Rejected</th>
                 <th>Saves</th>
-                <th>Created</th>
               </tr>
             </thead>
             <tbody className="w-full">
               <tr className="w-full">
-                <td>{job.category}</td>
-                <td>{job.status}</td>
+                <td>{jobdetail.data.category}</td>
+                <td>{jobdetail.data.status}</td>
 
                 <td className="truncate">
-                  {job.approved ? <div>yes</div> : <div>No</div>}
+                  {jobdetail.data.approved ? <div>yes</div> : <div>No</div>}
                 </td>
                 <td className="truncate">
-                  {job.rejected ? <div>yes</div> : <div>No</div>}
+                  {jobdetail.data.rejected ? <div>yes</div> : <div>No</div>}
                 </td>
-                <td>{job.saves}</td>
-                <td>{job.created}</td>
+                <td>{jobdetail.data.saves}</td>
               </tr>
             </tbody>
           </table>
