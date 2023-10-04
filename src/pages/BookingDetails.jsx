@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import profile from "../Asset/atmos.jpg";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../context/UserAuth";
 
 function BookingDetails() {
+  const { id } = useParams();
+
+  const [bookingDetails, setBookingDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/bookings/fetch/" + id, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((respond) => {
+        setBookingDetails(respond.data);
+        setLoading(false);
+      });
+  }, []);
   const book = {
     id: 1,
     address: "123 Main Street, Cityville",
@@ -10,7 +32,7 @@ function BookingDetails() {
     haveBrief: true,
     deliverableType: "Physical",
     expectDigitalContent: false,
-    brief: "Detailed instructions provided.",
+    brief: "Detailed ins tructions provided.",
     briefFile: "booking_brief.pdf",
     briefLink: "https://example.com/brief",
     deleted: false,
@@ -72,20 +94,30 @@ function BookingDetails() {
                 </tr>
               </thead>
               <tbody className="w-full">
-                <tr className="w-full">
-                  <td>{book.id}</td>
-                  <td className="truncate">{book.address}</td>
-                  <td>{book.appointmentDate}</td>
-                  <td>
-                    {book.deleted == true ? <div>yes</div> : <div>No</div>}
-                  </td>
-                  <td>{book.createdAt}</td>
-                  <td>{book.lastUpdated}</td>
-                  <td>{book.accepted}</td>
-                  <td>
-                    {book.rejected == true ? <div>yes</div> : <div>No</div>}
-                  </td>
-                </tr>
+                {bookingDetails.data && (
+                  <tr className="w-full">
+                    <td>{bookingDetails.data.id}</td>
+                    <td className="truncate">{bookingDetails.data.address}</td>
+                    <td>{bookingDetails.data.appointmentDate}</td>
+                    <td>
+                      {bookingDetails.data.deleted == true ? (
+                        <div>yes</div>
+                      ) : (
+                        <div>No</div>
+                      )}
+                    </td>
+                    <td>{bookingDetails.data.createdAt}</td>
+                    <td>{bookingDetails.data.lastUpdated}</td>
+                    <td>{bookingDetails.data.accepted}</td>
+                    <td>
+                      {bookingDetails.data.rejected == true ? (
+                        <div>yes</div>
+                      ) : (
+                        <div>No</div>
+                      )}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -94,7 +126,7 @@ function BookingDetails() {
           <h3 className="bg-blue-500 py-2  pl-4 text-xl font-semibold text-gray-100">
             Brief Information
           </h3>
-          {book.haveBrief == true ? (
+          {bookingDetails.data && bookingDetails.data.haveBrief == true ? (
             <table class=" w-full table-fixed text-left">
               <thead>
                 <tr>
@@ -105,9 +137,11 @@ function BookingDetails() {
               </thead>
               <tbody className="w-full">
                 <tr className="w-full">
-                  <td>{book.deliverableType}</td>
-                  <td className="truncate">{book.expectDigitalContent}</td>
-                  <td>{book.briefLink}</td>
+                  <td>{bookingDetails.data.deliverableType}</td>
+                  <td className="truncate">
+                    {bookingDetails.data.expectDigitalContent}
+                  </td>
+                  <td>{bookingDetails.data.briefLink}</td>
                 </tr>
               </tbody>
             </table>
